@@ -1,7 +1,7 @@
 page 50102 Royalties
 {
     ApplicationArea = All;
-    Caption = 'Royalties';
+    Caption = 'Royalty';
     PageType = List;
     UsageCategory = Lists;
     SourceTable = Royalty;
@@ -10,13 +10,18 @@ page 50102 Royalties
     {
         area(Content)
         {
-            repeater(General)
+            repeater(Group)
             {
 
-                field("No."; Rec."No.")
+                field("ItemNo."; Rec."ItemNo.")
                 {
+                    Visible = false;
                 }
                 field(Steps; Rec.Steps)
+                {
+
+                }
+                field(Number; Rec.Number)
                 {
 
                 }
@@ -35,40 +40,4 @@ page 50102 Royalties
             }
         }
     }
-
-    actions
-    {
-        area(processing)
-        {
-            action("Calculate Percentage")
-            {
-                ApplicationArea = All;
-                trigger OnAction()
-                var
-                    Steps: Record Royalty;
-
-                begin
-                    if Steps.FindSet() then
-                        repeat
-                            if Steps.Steps > 501 then
-                                steps."Percentage (%)" := 5
-                            else
-                                Steps."Percentage (%)" := 0;
-                            steps.Modify();
-                        until Steps.Next() = 0;
-                end;
-            }
-        }
-    }
-
-    // procedure SetParameters(ItemNo: Code[20]; Percentage: Decimal)
-    // var
-    //     Rec: Record "Royalty"; // Replace with the actual table
-    // begin
-    //     Rec.Reset();
-    //     Rec.SetRange("No.", ItemNo);
-    //     Rec.FindFirst();
-    //     Rec."Percentage (%)" := Percentage;
-    //     Rec.Modify();
-    // end;
 }

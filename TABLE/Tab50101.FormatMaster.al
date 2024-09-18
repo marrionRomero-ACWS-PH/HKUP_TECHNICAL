@@ -8,10 +8,12 @@ table 50101 "Format Master"
         field(1; Name; Code[50])
         {
             Caption = 'Name';
+            DataClassification = ToBeClassified;
         }
         field(2; Description; Text[100])
         {
             Caption = 'Description';
+            DataClassification = ToBeClassified;
         }
     }
     keys

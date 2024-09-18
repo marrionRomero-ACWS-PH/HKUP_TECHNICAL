@@ -10,9 +10,8 @@ page 50100 "Series Master"
     {
         area(Content)
         {
-            repeater(General)
+            repeater(Group)
             {
-
                 field(Name; Rec.Name)
                 {
                     ApplicationArea = All;

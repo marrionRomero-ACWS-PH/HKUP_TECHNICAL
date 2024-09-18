@@ -18,8 +18,7 @@ tableextension 50100 Item extends Item
         field(50102; Publisher; Code[20])
         {
             Caption = 'Publisher';
-            // FieldClass = FlowField;
-            TableRelation = Vendor."No." where("No." = FIELD(Publisher));
+            TableRelation = Vendor WHERE(Type = FILTER(Publisher));
         }
         field(50103; Series; Code[50])
         {
@@ -29,7 +28,7 @@ tableextension 50100 Item extends Item
         field(50104; Supplier; Code[20])
         {
             Caption = 'Supplier';
-            TableRelation = Vendor."No." WHERE("No." = FIELD(Supplier));
+            TableRelation = Vendor WHERE(Type = FILTER(Supplier));
         }
         field(50105; "Published Date"; Date)
         {
@@ -50,13 +49,15 @@ tableextension 50100 Item extends Item
         }
         field(50107; "Disount (%)"; Integer)
         {
-            Caption = 'Disount (%)';
+            Caption = 'Discount (%)';
             DataClassification = ToBeClassified;
         }
         field(50108; "Warning Level"; Integer)
         {
             Caption = 'Warning Level';
             DataClassification = ToBeClassified;
+            InitValue = 10;
+            Editable = false;
         }
         field(50109; Restriction; Text[100])
         {
@@ -105,8 +106,12 @@ tableextension 50100 Item extends Item
         field(50117; "Created On"; Date)
         {
             Caption = 'Created On';
-            DataClassification = ToBeClassified;
-
+            DataClassification = SystemMetadata;
+            Editable = false;
         }
     }
+    trigger OnInsert()
+    begin
+        "Created On" := Today;
+    end;
 }

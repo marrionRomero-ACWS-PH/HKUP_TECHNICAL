@@ -10,7 +10,7 @@ page 50101 "Format Master"
     {
         area(Content)
         {
-            repeater(General)
+            repeater(Group)
             {
                 field(Name; Rec.Name)
                 {
@@ -18,7 +18,6 @@ page 50101 "Format Master"
                 }
                 field(Description; Rec.Description)
                 {
-
                     ApplicationArea = all;
                 }
             }

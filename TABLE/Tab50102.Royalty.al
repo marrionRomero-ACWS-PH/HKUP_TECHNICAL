@@ -5,11 +5,9 @@ table 50102 Royalty
 
     fields
     {
-        field(1; "No."; Code[50])
+        field(1; "ItemNo."; Code[50])
         {
-            Caption = 'No.';
-
-            // TableRelation = Item."No.";
+            Caption = 'Item No.';
         }
         field(2; "Reached Discount"; Decimal)
         {
@@ -19,21 +17,27 @@ table 50102 Royalty
         {
             Caption = 'Cost Essential';
         }
-        field(4; Steps; Integer)
+        field(4; Steps; Code[20])
         {
             Caption = 'Steps';
-            // TableRelation = item."Quantity Sold";
         }
         field(5; "Percentage (%)"; Decimal)
         {
             Caption = 'Percentage (%)';
         }
+        field(6; "Number"; Integer)
+        {
+            Caption = 'Number';
+        }
     }
     keys
     {
-        key(PK; "No.")
+        key(PK; "ItemNo.", Steps)
         {
             Clustered = true;
         }
     }
+
 }
+
+

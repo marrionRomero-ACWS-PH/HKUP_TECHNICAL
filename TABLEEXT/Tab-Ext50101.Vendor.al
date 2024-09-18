@@ -6,8 +6,8 @@ tableextension 50101 Vendor extends Vendor
         {
             Caption = 'Type';
             DataClassification = ToBeClassified;
-            OptionCaption = 'Publisher,Supplier';
-            OptionMembers = "Publisher","Supplier";
+            OptionCaption = 'Publisher,Supplier,Recipient';
+            OptionMembers = "Publisher","Supplier","Recipient";
         }
     }
 }
