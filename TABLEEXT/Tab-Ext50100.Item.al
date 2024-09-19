@@ -19,6 +19,7 @@ tableextension 50100 Item extends Item
         {
             Caption = 'Publisher';
             TableRelation = Vendor WHERE(Type = FILTER(Publisher));
+            // TableRelation = Vendor."No." WHERE("Publisher" = FILTER(true));
         }
         field(50103; Series; Code[50])
         {
@@ -29,6 +30,7 @@ tableextension 50100 Item extends Item
         {
             Caption = 'Supplier';
             TableRelation = Vendor WHERE(Type = FILTER(Supplier));
+            // TableRelation = Vendor."No." WHERE("Supplier" = FILTER(true));
         }
         field(50105; "Published Date"; Date)
         {

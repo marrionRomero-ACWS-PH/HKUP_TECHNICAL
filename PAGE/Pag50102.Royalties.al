@@ -17,11 +17,7 @@ page 50102 Royalties
                 {
                     Visible = false;
                 }
-                field(Steps; Rec.Steps)
-                {
-
-                }
-                field(Number; Rec.Number)
+                field("No."; Rec."No.")
                 {
 
                 }
@@ -30,6 +26,10 @@ page 50102 Royalties
 
                 }
                 field("Cost Essential"; Rec."Cost Essential")
+                {
+
+                }
+                field(Number; Rec.Steps)
                 {
 
                 }

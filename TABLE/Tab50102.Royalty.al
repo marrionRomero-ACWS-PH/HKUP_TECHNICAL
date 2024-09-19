@@ -17,22 +17,22 @@ table 50102 Royalty
         {
             Caption = 'Cost Essential';
         }
-        field(4; Steps; Code[20])
+        field(4; "No."; Code[20])
         {
-            Caption = 'Steps';
+            Caption = 'No.';
         }
         field(5; "Percentage (%)"; Decimal)
         {
             Caption = 'Percentage (%)';
         }
-        field(6; "Number"; Integer)
+        field(6; Steps; Integer)
         {
-            Caption = 'Number';
+            Caption = 'Steps';
         }
     }
     keys
     {
-        key(PK; "ItemNo.", Steps)
+        key(PK; "ItemNo.", "No.")
         {
             Clustered = true;
         }
