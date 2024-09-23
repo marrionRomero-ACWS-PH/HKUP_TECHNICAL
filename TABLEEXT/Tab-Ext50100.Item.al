@@ -10,16 +10,26 @@ tableextension 50100 Item extends Item
         field(50101; "Pub Code"; Option)
         {
             Caption = 'Pub Code';
-            DataClassification = ToBeClassified;
-            OptionMembers = "A","C","G","X","Q","S";
-            OptionCaption = 'A - Academic Title,C - Commission Title,G - General Title,X - Agency Title,Q – Ebook,S – Service Charge';
-
+            OptionMembers = "A - Academic Title","C - Commission Title","G - General Title","X - Agency Title","Q – E-book","S – Service Charge";
+            trigger OnValidate()
+            begin
+                case "Pub Code" of
+                    0, 1: // A - Academic Title, C - Commission Title
+                        Rec."Disount (%)" := 30;
+                    2, 3: // G - General Title, X - Agency Title
+                        Rec."Disount (%)" := 35;
+                    4, 5: // Q – E-book, S – Service Charge
+                        Rec."Disount (%)" := 0;
+                end;
+            end;
         }
+
+
         field(50102; Publisher; Code[20])
         {
             Caption = 'Publisher';
-            TableRelation = Vendor WHERE(Type = FILTER(Publisher));
-            // TableRelation = Vendor."No." WHERE("Publisher" = FILTER(true));
+            // TableRelation = Vendor WHERE(Type = FILTER(Publisher));
+            TableRelation = Vendor."No." WHERE("Publisher" = FILTER(true));
         }
         field(50103; Series; Code[50])
         {
@@ -29,8 +39,8 @@ tableextension 50100 Item extends Item
         field(50104; Supplier; Code[20])
         {
             Caption = 'Supplier';
-            TableRelation = Vendor WHERE(Type = FILTER(Supplier));
-            // TableRelation = Vendor."No." WHERE("Supplier" = FILTER(true));
+            // TableRelation = Vendor WHERE(Type = FILTER(Supplier));
+            TableRelation = Vendor."No." WHERE("Supplier" = FILTER(true));
         }
         field(50105; "Published Date"; Date)
         {
@@ -53,13 +63,13 @@ tableextension 50100 Item extends Item
         {
             Caption = 'Discount (%)';
             DataClassification = ToBeClassified;
+
         }
         field(50108; "Warning Level"; Integer)
         {
             Caption = 'Warning Level';
             DataClassification = ToBeClassified;
             InitValue = 10;
-            Editable = false;
         }
         field(50109; Restriction; Text[100])
         {

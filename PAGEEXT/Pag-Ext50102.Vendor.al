@@ -5,23 +5,20 @@ pageextension 50102 Vendor extends "Vendor Card"
     {
         addlast(General)
         {
-            field("Type"; Rec.Type)
+
+            field(Publisher; Rec.Publisher)
             {
                 ApplicationArea = All;
             }
-            // field(Publisher; Rec.Publisher)
-            // {
-            //     ApplicationArea = All;
-            // }
-            // field(Supplier; Rec.Supplier)
-            // {
-            //     ApplicationArea = All;
-            // }
+            field(Supplier; Rec.Supplier)
+            {
+                ApplicationArea = All;
+            }
 
-            // field(Recipient; Rec.Recipient)
-            // {
-            //     ApplicationArea = All;
-            // }
+            field(Recipient; Rec.Recipient)
+            {
+                ApplicationArea = All;
+            }
         }
     }
     var

@@ -1,16 +1,20 @@
 page 50103 Author
 {
-    ApplicationArea = All;
-    Caption = 'Author';
     PageType = List;
     SourceTable = Author;
-    UsageCategory = Administration;
+    ApplicationArea = All;
+    UsageCategory = Lists;
+    Caption = 'Author';
+    CardPageID = "Author Card";
+    Editable = false;
+    PromotedActionCategories = 'New,Process,Report,New Document,Vendor,Navigate';
+    RefreshOnActivate = true;
 
     layout
     {
         area(Content)
         {
-            repeater(General)
+            repeater(Group)
             {
                 field("Author No."; Rec."Author No.")
                 {
@@ -20,7 +24,11 @@ page 50103 Author
                 {
                     ApplicationArea = All;
                 }
-                field(Recipient; Rec.Recipient)
+                field("Recipient No.s"; Rec."Recipient No.")
+                {
+                    ApplicationArea = All;
+                }
+                field("Recipient Name"; Rec."Recipient Name")
                 {
                     ApplicationArea = All;
                 }

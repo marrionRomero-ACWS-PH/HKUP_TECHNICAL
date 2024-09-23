@@ -14,11 +14,11 @@ table 50103 Author
         {
             Caption = 'Author Name';
         }
-        field(3; Recipient; Code[20])
+        field(3; "Recipient No."; Code[20])
         {
-            Caption = 'Recipient';
-            // TableRelation = Vendor."No." WHERE("Recipient" = FILTER(true));
-            TableRelation = Vendor WHERE(Type = FILTER(Recipient));
+            Caption = 'Recipient No.';
+            TableRelation = Vendor."No." WHERE("Recipient" = FILTER(true));
+            // TableRelation = Vendor where(Recipient = const(true));
         }
         field(4; Address; Text[100])
         {
@@ -28,6 +28,11 @@ table 50103 Author
         {
             Caption = 'Address 2';
         }
+        field(6; "Recipient Name"; Text[50])
+        {
+            Caption = 'Recipient Name';
+
+        }
     }
     keys
     {
@@ -36,4 +41,18 @@ table 50103 Author
             Clustered = true;
         }
     }
+
+    trigger OnInsert()
+    var
+        PurchSetup: Record "Purchases & Payables Setup";
+        NoSeries: Codeunit "No. Series";
+    begin
+        PurchSetup.Get();
+        Rec."Author No." := NoSeries.GetNextNo(PurchSetup."Author No.'s", WorkDate, true);
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnAfterValidateNo(var Author: Record Author; xAuthor: Record Author)
+    begin
+    end;
 }
