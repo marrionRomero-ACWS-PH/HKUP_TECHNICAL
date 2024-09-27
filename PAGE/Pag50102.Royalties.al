@@ -19,19 +19,15 @@ page 50102 Royalties
                 }
                 field("No."; Rec."No.")
                 {
-
                 }
                 field("Reached Discount"; Rec."Reached Discount")
                 {
-
                 }
                 field("Cost Essential"; Rec."Cost Essential")
                 {
-
                 }
                 field(Number; Rec.Steps)
                 {
-
                 }
                 field("Percentage (%)"; Rec."Percentage (%)")
                 {

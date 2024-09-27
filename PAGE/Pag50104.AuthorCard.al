@@ -1,31 +1,37 @@
 page 50104 "Author Card"
 {
-    PageType = Card;
-    SourceTable = Author;
-    ApplicationArea = All;
     Caption = 'Author Card';
-
-
+    PageType = Card;
+    SourceTable = Authors;
+    ApplicationArea = All;
 
     layout
     {
         area(Content)
         {
-            group(Group)
+            group(General)
             {
                 Caption = 'General';
 
                 field("Author No."; Rec."Author No.")
                 {
+                    ApplicationArea = All;
+                    Visible = NoFieldVisible;
 
+                    trigger OnAssistEdit()
+                    begin
+                        if Rec.AssistEdit(xRec) then
+                            CurrPage.Update();
+                    end;
                 }
                 field("Author Name"; Rec."Author Name")
                 {
+                    ApplicationArea = All;
                 }
                 field("Recipient No."; Rec."Recipient No.")
                 {
                     ApplicationArea = All;
-
+                    Importance = Additional;
                     trigger OnValidate()
                     var
                         VendorRec: Record Vendor;
@@ -39,6 +45,15 @@ page 50104 "Author Card"
                 field("Recipient Name"; Rec."Recipient Name")
                 {
                 }
+                field("No. Series"; Rec."No. Series")
+                {
+                    Visible = false;
+                }
+            }
+
+            group(AddressDetails)
+            {
+                Caption = 'Address & Contact';
                 field(Address; Rec.Address)
                 {
                 }
@@ -48,4 +63,26 @@ page 50104 "Author Card"
             }
         }
     }
+
+    trigger OnOpenPage()
+    begin
+        if GuiAllowed() then
+            OnOpenPageFunc();
+    end;
+
+    local procedure OnOpenPageFunc()
+    begin
+        SetNoFieldVisible();
+    end;
+
+    var
+        NoFieldVisible: Boolean;
+
+    local procedure SetNoFieldVisible()
+    var
+        DocumentNoVisibility: Codeunit "Event Procedure";
+    begin
+        NoFieldVisible := DocumentNoVisibility.AuthorNoIsVisible();
+    end;
+
 }

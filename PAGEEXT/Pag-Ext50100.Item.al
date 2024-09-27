@@ -43,7 +43,6 @@ pageextension 50100 Item extends "Item Card"
                 ApplicationArea = All;
                 Lookup = true;
                 LookupPageId = "Format Master";
-
             }
             field("Discount (%)"; Rec."Disount (%)")
             {

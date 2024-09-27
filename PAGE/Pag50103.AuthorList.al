@@ -1,10 +1,10 @@
-page 50103 Author
+page 50103 "Author List"
 {
     PageType = List;
-    SourceTable = Author;
+    SourceTable = Authors;
     ApplicationArea = All;
     UsageCategory = Lists;
-    Caption = 'Author';
+    Caption = 'Authors';
     CardPageID = "Author Card";
     Editable = false;
     PromotedActionCategories = 'New,Process,Report,New Document,Vendor,Navigate';
