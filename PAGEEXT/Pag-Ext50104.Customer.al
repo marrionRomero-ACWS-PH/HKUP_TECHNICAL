@@ -2,6 +2,15 @@ pageextension 50104 Customer extends "Customer Card"
 {
     layout
     {
+
+        addafter(Name)
+        {
+            field("Name two"; Rec."Name 2")
+            {
+                Caption = 'Name 2';
+                ApplicationArea = all;
+            }
+        }
         addlast(General)
         {
             field("Remarks"; Rec."Remarks")

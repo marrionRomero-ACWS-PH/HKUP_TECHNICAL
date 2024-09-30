@@ -1,5 +1,6 @@
 codeunit 50100 "Event Procedure"
 {
+    ///////------AUTHOR NO. VISIBILITTY START------\\\\\\\
     procedure AuthorNoIsVisible(): Boolean
     var
         NoSeriesCode: Code[20];
@@ -22,7 +23,6 @@ codeunit 50100 "Event Procedure"
         AuthNoVisible := ForceShowNoSeriesForDocNo(NoSeriesCode);
         exit(AuthNoVisible);
     end;
-
 
     local procedure DetermineAuthorSeriesNo(): Code[20]
     var
@@ -58,4 +58,6 @@ codeunit 50100 "Event Procedure"
     local procedure OnBeforeAuthorNoIsVisible(var IsVisible: Boolean; var IsHandled: Boolean)
     begin
     end;
+
+    ///////------AUTHOR NO. VISIBILITTY END------\\\\\\\
 }
