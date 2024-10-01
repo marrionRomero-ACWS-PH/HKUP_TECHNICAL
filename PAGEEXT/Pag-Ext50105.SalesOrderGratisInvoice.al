@@ -11,15 +11,4 @@ pageextension 50105 "SalesOrder-GratisInvoice" extends "Sales Order"
             }
         }
     }
-
-    trigger OnAfterGetRecord()
-    var
-        SalesRec: record "Sales Line";
-    begin
-        if Rec."Gratis Invoice" then begin
-            Rec.Reset();
-            SalesRec."Unit Price" := 0;
-            salesRec.Quantity := 0;
-        end;
-    end;
 }

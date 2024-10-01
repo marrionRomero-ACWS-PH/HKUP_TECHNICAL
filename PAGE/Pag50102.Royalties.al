@@ -12,7 +12,6 @@ page 50102 Royalties
         {
             repeater(Group)
             {
-
                 field("ItemNo."; Rec."ItemNo.")
                 {
                     Visible = false;

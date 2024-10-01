@@ -2,7 +2,6 @@ pageextension 50104 Customer extends "Customer Card"
 {
     layout
     {
-
         addafter(Name)
         {
             field("Name two"; Rec."Name 2")

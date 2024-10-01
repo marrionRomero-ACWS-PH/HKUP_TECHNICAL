@@ -10,7 +10,7 @@ tableextension 50100 Item extends Item
         field(50101; "Pub Code"; Option)
         {
             Caption = 'Pub Code';
-            OptionMembers = "A - Academic Title","C - Commission Title","G - General Title","X - Agency Title","Q – E-book","S – Service Charge";
+            OptionMembers = "A - Academic Title","C - Commission Title","G - General Title","X - Agency Title","Q–Ebook","S–Service Charge";
             trigger OnValidate()
             begin
                 case "Pub Code" of
@@ -23,8 +23,6 @@ tableextension 50100 Item extends Item
                 end;
             end;
         }
-
-
         field(50102; Publisher; Code[20])
         {
             Caption = 'Publisher';

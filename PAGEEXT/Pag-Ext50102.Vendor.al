@@ -23,5 +23,4 @@ pageextension 50102 Vendor extends "Vendor Card"
     }
     var
         myInt: Integer;
-
 }
