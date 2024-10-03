@@ -16,7 +16,6 @@ tableextension 50103 Customer extends Customer
         {
             Caption = 'Payment Term';
             DataClassification = ToBeClassified;
-
         }
         field(50116; "Consignment A/C"; Boolean)
         {

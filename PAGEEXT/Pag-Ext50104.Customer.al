@@ -16,7 +16,6 @@ pageextension 50104 Customer extends "Customer Card"
             {
                 ApplicationArea = All;
                 MultiLine = true;
-
             }
             field("Sales Area"; Rec."Sales Area")
             {
@@ -25,7 +24,6 @@ pageextension 50104 Customer extends "Customer Card"
             field("Consignment A/C  "; Rec."Consignment A/C")
             {
                 ApplicationArea = All;
-
             }
             field("Author No."; Rec."Author No.")
             {
@@ -51,6 +49,4 @@ pageextension 50104 Customer extends "Customer Card"
             }
         }
     }
-    var
-        myInt: Integer;
 }

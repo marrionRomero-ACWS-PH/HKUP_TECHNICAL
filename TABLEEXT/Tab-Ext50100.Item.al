@@ -55,13 +55,11 @@ tableextension 50100 Item extends Item
             Caption = 'Format';
             DataClassification = ToBeClassified;
             TableRelation = "Format Master";
-
         }
         field(50107; "Disount (%)"; Integer)
         {
             Caption = 'Discount (%)';
             DataClassification = ToBeClassified;
-
         }
         field(50108; "Warning Level"; Integer)
         {

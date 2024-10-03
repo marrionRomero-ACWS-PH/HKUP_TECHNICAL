@@ -28,7 +28,6 @@ pageextension 50100 Item extends "Item Card"
                 ApplicationArea = All;
                 Lookup = true;
                 LookupPageId = "Series Master";
-
             }
             field("Published Date"; Rec."Published Date")
             {
@@ -55,12 +54,10 @@ pageextension 50100 Item extends "Item Card"
             field("Restriction"; Rec."Restriction")
             {
                 ApplicationArea = All;
-
             }
             field("Status"; Rec."Status")
             {
                 ApplicationArea = All;
-
             }
             field("Reprint History"; Rec."Reprint History")
             {

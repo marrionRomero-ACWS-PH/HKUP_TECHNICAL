@@ -11,6 +11,4 @@ pageextension 50103 "Author No.'s" extends "Purchases & Payables Setup"
             }
         }
     }
-    var
-        myInt: Integer;
 }

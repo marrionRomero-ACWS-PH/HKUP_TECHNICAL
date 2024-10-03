@@ -14,7 +14,7 @@ tableextension 50104 "SalesOrder-GratisInvoice" extends "Sales Header"
             end;
         }
     }
-    ////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\////////////////////////////\\\\\\\\\\\\\\\\\\\\\
+
     local procedure SetSalesLineValuesToZero()
     var
         SalesLine: Record "Sales Line";
@@ -27,7 +27,6 @@ tableextension 50104 "SalesOrder-GratisInvoice" extends "Sales Header"
             if SalesLine.FindSet() then begin
 
                 repeat
-                    // SalesLine.Validate(Quantity, 0);
                     SalesLine.Validate("Unit Price", 0);
                     SalesLine."Line Amount" := 0;
                     SalesLine.Modify();
