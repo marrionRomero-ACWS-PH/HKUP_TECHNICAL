@@ -7,18 +7,18 @@ tableextension 50100 Item extends Item
             Caption = 'Full Title';
             DataClassification = ToBeClassified;
         }
-        field(50101; "Pub Code"; Option)
+        field(50101; "FEO Code"; Option)
         {
-            Caption = 'Pub Code';
-            OptionMembers = "A - Academic Title","C - Commission Title","G - General Title","X - Agency Title","Q–Ebook","S–Service Charge";
+            Caption = 'FEO Code';
+            OptionMembers = "A","C","G","X","Q";
             trigger OnValidate()
             begin
-                case "Pub Code" of
+                case "FEO Code" of
                     0, 1: // A - Academic Title, C - Commission Title
                         Rec."Disount (%)" := 30;
                     2, 3: // G - General Title, X - Agency Title
                         Rec."Disount (%)" := 35;
-                    4, 5: // Q – E-book, S – Service Charge
+                    4: // Q – E-book
                         Rec."Disount (%)" := 0;
                 end;
             end;
@@ -48,14 +48,24 @@ tableextension 50100 Item extends Item
         field(50106; "Actual Pages"; Integer)
         {
             Caption = 'Actual Pages';
+            MinValue = 0;
+            MaxValue = 9999;
             DataClassification = ToBeClassified;
         }
-        field(50118; "Format"; Code[50])
+        field(50118; "Format"; Option)
         {
             Caption = 'Format';
             DataClassification = ToBeClassified;
-            TableRelation = "Format Master";
+            OptionMembers = hb,pb,"eBook (ePub)","eBook (PDF)","hb (+media)","import hb","import pb","eBook (HKSO)","pb (+media)",other,"eBook (HTML)","reprint pb (new ISBN)",NA;
+
         }
+
+        // field(50118; "Format"; Code[50])
+        // {
+        //     Caption = 'Format';
+        //     DataClassification = ToBeClassified;
+        //     TableRelation = "Format Master";
+        // }
         field(50107; "Disount (%)"; Integer)
         {
             Caption = 'Discount (%)';
@@ -67,22 +77,23 @@ tableextension 50100 Item extends Item
             DataClassification = ToBeClassified;
             InitValue = 10;
         }
-        field(50109; Restriction; Text[100])
+        field(50109; Restriction; Text[250])
         {
             Caption = 'Restriction';
             DataClassification = ToBeClassified;
+
         }
-        field(50110; Status; Text[100])
+        field(50110; Status; Text[250])
         {
             Caption = 'Status';
             DataClassification = ToBeClassified;
         }
-        field(50111; "Reprint History"; Text[200])
+        field(50111; "Reprint History"; Text[250])
         {
             Caption = 'Reprint History';
             DataClassification = ToBeClassified;
         }
-        field(50112; Remarks; Text[200])
+        field(50112; Remarks; Text[250])
         {
             Caption = 'Remarks';
             DataClassification = ToBeClassified;
@@ -116,6 +127,37 @@ tableextension 50100 Item extends Item
             Caption = 'Created On';
             DataClassification = SystemMetadata;
             Editable = false;
+        }
+        field(50119; "No Calculation for Commission"; Boolean)
+        {
+            Caption = 'No Calculation for Commission';
+            DataClassification = ToBeClassified;
+        }
+        field(50120; "Royalty Method Calculation Description"; Text[250])
+        {
+            Caption = 'Royalty Method Calculation Description';
+            DataClassification = ToBeClassified;
+        }
+        field(50121; "Parent Item No."; Code[20])
+        {
+            Caption = 'Parent Item No.';
+            DataClassification = ToBeClassified;
+            // TableRelation =
+        }
+        field(50122; "Print Title"; Text[100])
+        {
+            Caption = 'Print Title';
+            DataClassification = ToBeClassified;
+        }
+        field(50123; "No. of Authors"; Integer)
+        {
+            Caption = 'No. of Authors';
+            DataClassification = ToBeClassified;
+        }
+        field(50124; "No. of SAR Documents"; Integer)
+        {
+            Caption = 'No. of SAR Documents';
+            DataClassification = ToBeClassified;
         }
     }
     trigger OnInsert()

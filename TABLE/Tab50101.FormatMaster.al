@@ -1,13 +1,13 @@
-table 50101 "Format Master"
+table 50101 "Item Format"
 {
-    Caption = 'Format Master';
+    Caption = 'Item Format';
     DataClassification = ToBeClassified;
 
     fields
     {
-        field(1; Name; Code[50])
+        field(1; Code; Code[50])
         {
-            Caption = 'Name';
+            Caption = 'Code';
             DataClassification = ToBeClassified;
         }
         field(2; Description; Text[100])
@@ -18,7 +18,7 @@ table 50101 "Format Master"
     }
     keys
     {
-        key(PK; Name)
+        key(PK; Code)
         {
             Clustered = true;
         }

@@ -1,10 +1,10 @@
-page 50102 Royalties
+page 50102 "Item Royalty"
 {
     ApplicationArea = All;
-    Caption = 'Royalty';
+    Caption = 'Item Royalty';
     PageType = List;
     UsageCategory = Lists;
-    SourceTable = Royalty;
+    SourceTable = "Item Royalty";
 
     layout
     {
@@ -12,25 +12,24 @@ page 50102 Royalties
         {
             repeater(Group)
             {
-                field("ItemNo."; Rec."ItemNo.")
+                field("Item No."; Rec."Item No.")
                 {
                     Visible = false;
                 }
-                field("No."; Rec."No.")
+                field("No."; Rec."Line No.")
                 {
                 }
-                field("Reached Discount"; Rec."Reached Discount")
-                {
-                }
-                field("Cost Essential"; Rec."Cost Essential")
+                field("Reached Discount %"; Rec."Reached Discount %")
                 {
                 }
                 field(Number; Rec.Steps)
                 {
                 }
-                field("Percentage (%)"; Rec."Percentage (%)")
+                field("Percentage %"; Rec."Percentage %")
                 {
-
+                }
+                field("Cost Essential"; Rec."Exclude Royalty if Unit Cost Exceeds Sales Price")
+                {
                 }
             }
         }

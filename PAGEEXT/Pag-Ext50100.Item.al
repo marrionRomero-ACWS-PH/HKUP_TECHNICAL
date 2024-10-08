@@ -9,18 +9,25 @@ pageextension 50100 Item extends "Item Card"
                 ApplicationArea = All;
             }
 
-            field("Pub Code"; Rec."Pub Code")
+            field("FEO Code"; Rec."FEO Code")
             {
                 ApplicationArea = All;
+            }
+            field("Print Title"; Rec."Print Title")
+            {
+                ApplicationArea = All;
+                ShowMandatory = true;
             }
             field(Publisher; Rec.Publisher)
             {
                 ApplicationArea = All;
+                ShowMandatory = true;
 
             }
             field(Supplier; Rec.Supplier)
             {
                 ApplicationArea = All;
+                ShowMandatory = true;
 
             }
             field(Series; Rec.Series)
@@ -58,6 +65,7 @@ pageextension 50100 Item extends "Item Card"
             field("Status"; Rec."Status")
             {
                 ApplicationArea = All;
+                MultiLine = true;
             }
             field("Reprint History"; Rec."Reprint History")
             {
@@ -78,11 +86,27 @@ pageextension 50100 Item extends "Item Card"
             {
                 ApplicationArea = All;
             }
-            field("Commision Method"; Rec."Commission Method")
+            // field("Commision Method"; Rec."Commission Method")
+            // {
+            //     ApplicationArea = All;
+            // }
+            field("CRoyalty Method Calculation Description"; Rec."Royalty Method Calculation Description")
             {
                 ApplicationArea = All;
             }
             field("Quantity Sold"; Rec."Quantity Sold")
+            {
+                ApplicationArea = All;
+            }
+            field("Parent Item No"; Rec."Parent Item No.")
+            {
+                ApplicationArea = All;
+            }
+            field("No. of Authors"; Rec."No. of Authors")
+            {
+                ApplicationArea = All;
+            }
+            field("No. of SAR Documents "; Rec."No. of SAR Documents")
             {
                 ApplicationArea = All;
             }
@@ -93,4 +117,11 @@ pageextension 50100 Item extends "Item Card"
             }
         }
     }
+    trigger OnOpenPage()
+    var
+        AuthorCalc: Codeunit "Event Procedure";
+    begin
+        AuthorCalc.CalculateNoOfAuthors(Rec);
+    end;
+
 }

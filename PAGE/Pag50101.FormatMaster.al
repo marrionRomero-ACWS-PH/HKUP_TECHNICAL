@@ -3,7 +3,7 @@ page 50101 "Format Master"
     ApplicationArea = All;
     Caption = 'Format Master';
     PageType = List;
-    SourceTable = "Format Master";
+    SourceTable = "Item Format";
     UsageCategory = Lists;
 
     layout
@@ -12,7 +12,7 @@ page 50101 "Format Master"
         {
             repeater(Group)
             {
-                field(Name; Rec.Name)
+                field(Code; Rec.Code)
                 {
                     ApplicationArea = all;
                 }

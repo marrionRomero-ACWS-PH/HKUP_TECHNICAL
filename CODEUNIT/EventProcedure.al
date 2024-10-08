@@ -1,5 +1,6 @@
 codeunit 50100 "Event Procedure"
 {
+    SingleInstance = false;
     ///////------AUTHOR NO. VISIBILITTY START------\\\\\\\
     procedure AuthorNoIsVisible(): Boolean
     var
@@ -58,6 +59,17 @@ codeunit 50100 "Event Procedure"
     local procedure OnBeforeAuthorNoIsVisible(var IsVisible: Boolean; var IsHandled: Boolean)
     begin
     end;
-
     ///////------AUTHOR NO. VISIBILITTY END------\\\\\\\
+
+
+
+    ///////------AUTHOR NO. CALCULATION START------\\\\\\\
+    procedure CalculateNoOfAuthors(var ItemRec: Record Item)
+    var
+        ItemAuthorRec: Record "Item Author";
+    begin
+        ItemAuthorRec.SetRange("Item No.", ItemRec."No.");
+        ItemRec."No. of Authors" := ItemAuthorRec.Count;
+        ItemRec.Modify();
+    end;
 }

@@ -2,11 +2,11 @@ tableextension 50105 "SalesLine(Pub Code)" extends "Sales Line"
 {
     fields
     {
-        field(50102; "Pub Code"; Code[20])
+        field(50102; "FEO Code"; Code[20])
         {
-            Caption = 'Pub Code';
+            Caption = 'FEO Code';
             Editable = false;
-            TableRelation = Item."Pub Code";
+            TableRelation = Item."FEO Code";
         }
     }
 
@@ -18,7 +18,7 @@ tableextension 50105 "SalesLine(Pub Code)" extends "Sales Line"
     begin
         if ("Type" = "Type"::Item) then begin
             if ItemRecord.Get("No.") then
-                "Pub Code" := Format(ItemRecord."Pub Code");
+                "FEO Code" := Format(ItemRecord."FEO Code");
         end;
 
         begin
@@ -41,13 +41,13 @@ tableextension 50105 "SalesLine(Pub Code)" extends "Sales Line"
                         if (ItemRecord."Type" <> ItemRecord."Type"::Service) and
                            (ItemRecord."Type" <> ItemRecord."Type"::"Non-Inventory") and
                            (ItemRecord."Type" = ItemRecord."Type"::Inventory) and
-                           (ItemRecord."Pub Code" <> ItemRecord."Pub Code"::"Q–Ebook") then
+                           (ItemRecord."FEO Code" <> ItemRecord."FEO Code"::"Q") then
                             Error('This is an Ebook invoice, please select an Ebook item.');
                     end;
                 end
                 else begin
                     if ItemRecord.Get("No.") then begin
-                        if (ItemRecord."Pub Code" = ItemRecord."Pub Code"::"Q–Ebook") then
+                        if (ItemRecord."FEO Code" = ItemRecord."FEO Code"::"Q") then
                             Error('This is not an Ebook invoice, please select a non-Ebook item.');
                     end;
                 end;
@@ -58,7 +58,7 @@ tableextension 50105 "SalesLine(Pub Code)" extends "Sales Line"
     trigger OnDelete()
     begin
         if ("Type" = "Type"::Item) then
-            Validate("Pub Code", '');
+            Validate("FEO Code", '');
     end;
 
 

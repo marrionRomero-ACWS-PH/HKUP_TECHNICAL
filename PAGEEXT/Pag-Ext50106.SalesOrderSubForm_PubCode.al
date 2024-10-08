@@ -10,9 +10,9 @@ pageextension 50106 "SalesLine(Pub Code)" extends "Sales Order Subform"
         }
         addafter(Description)
         {
-            field("Pub Code"; Rec."Pub Code")
+            field("FEO Code"; Rec."FEO Code")
             {
-                Caption = 'Pub Code';
+                Caption = 'FEO Code';
                 ApplicationArea = all;
                 Editable = false;
             }
