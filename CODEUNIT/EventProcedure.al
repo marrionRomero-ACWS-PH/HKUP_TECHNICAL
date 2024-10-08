@@ -27,11 +27,11 @@ codeunit 50100 "Event Procedure"
 
     local procedure DetermineAuthorSeriesNo(): Code[20]
     var
-        PurchasesPayablesSetup: Record "Purchases & Payables Setup";
+        SalesReceivablesSetup: Record "Sales & Receivables Setup";
     begin
-        PurchasesPayablesSetup.SetLoadFields("Author No.'s");
-        PurchasesPayablesSetup.Get();
-        exit(PurchasesPayablesSetup."Author No.'s");
+        SalesReceivablesSetup.SetLoadFields("Author No.'s");
+        SalesReceivablesSetup.Get();
+        exit(SalesReceivablesSetup."Author No.'s");
     end;
 
     procedure ForceShowNoSeriesForDocNo(NoSeriesCode: Code[20]): Boolean

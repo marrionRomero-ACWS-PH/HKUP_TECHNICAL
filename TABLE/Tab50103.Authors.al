@@ -14,7 +14,7 @@ table 50103 Authors
             DataClassification = ToBeClassified;
             trigger OnValidate()
             var
-                PurchSetup: Record "Purchases & Payables Setup";
+                PurchSetup: Record "Sales & Receivables Setup";
                 NoSeries: Codeunit "No. Series";
 
             begin
@@ -76,7 +76,7 @@ table 50103 Authors
     }
     procedure AssistEdit(OldAuth: Record Authors): Boolean
     var
-        PurchSetup: Record "Purchases & Payables Setup";
+        PurchSetup: Record "Sales & Receivables Setup";
         Auth: Record Authors;
         NoSeries: Codeunit "No. Series";
 
@@ -94,7 +94,7 @@ table 50103 Authors
 
     trigger OnInsert()
     var
-        PurchSetup: Record "Purchases & Payables Setup";
+        PurchSetup: Record "Sales & Receivables Setup";
         Author: Record Authors;
         NoSeries: Codeunit "No. Series";
         NoSeriesMgt: Codeunit NoSeriesManagement;
@@ -108,7 +108,7 @@ table 50103 Authors
         if "Author No." = '' then begin
             PurchSetup.Get();
             PurchSetup.TestField("Author No.'s");
-            NoSeriesMgt.RaiseObsoleteOnBeforeInitSeries(PurchSetup."Vendor Nos.", xRec."No. Series", 0D, "Author No.", "No. Series", IsHandled);
+            NoSeriesMgt.RaiseObsoleteOnBeforeInitSeries(PurchSetup."Author No.'s", xRec."No. Series", 0D, "Author No.", "No. Series", IsHandled);
 
             if not IsHandled then begin
                 "No. Series" := PurchSetup."Author No.'s";
@@ -120,7 +120,7 @@ table 50103 Authors
                 while Author.Get("Author No.") do
                     "Author No." := NoSeries.GetNextNo("No. Series");
 
-                NoSeriesMgt.RaiseObsoleteOnAfterInitSeries("No. Series", PurchSetup."Vendor Nos.", 0D, "Author No.");
+                NoSeriesMgt.RaiseObsoleteOnAfterInitSeries("No. Series", PurchSetup."Author No.'s", 0D, "Author No.");
             end;
         end;
     end;

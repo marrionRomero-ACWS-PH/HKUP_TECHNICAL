@@ -17,21 +17,21 @@ tableextension 50103 Customer extends Customer
             Caption = 'Payment Term';
             DataClassification = ToBeClassified;
         }
-        field(50116; "Consignment A/C"; Boolean)
+        field(50116; "Consignment Account"; Boolean)
         {
-            Caption = 'Consignment A/C';
+            Caption = 'Consignment Account';
             DataClassification = ToBeClassified;
         }
 
-        field(50118; "Author No."; Code[20])
+        field(50118; "Author"; Code[20])
         {
-            Caption = 'Author No.';
+            Caption = 'Author';
             DataClassification = ToBeClassified;
             TableRelation = Authors;
         }
         field(50119; "Author Name"; Code[100])
         {
-            Caption = 'Author Name';
+            Caption = 'Name';
             DataClassification = ToBeClassified;
         }
         field(50120; "Discount %"; Integer)
@@ -40,6 +40,16 @@ tableextension 50103 Customer extends Customer
             DataClassification = ToBeClassified;
             MinValue = 0;
             MaxValue = 100;
+        }
+        field(50121; "Author Address"; Code[100])
+        {
+            Caption = 'Address';
+            DataClassification = ToBeClassified;
+        }
+        field(50122; "Author Address 2"; Code[100])
+        {
+            Caption = 'Address 2';
+            DataClassification = ToBeClassified;
         }
 
     }

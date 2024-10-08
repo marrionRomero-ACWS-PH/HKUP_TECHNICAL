@@ -21,11 +21,11 @@ pageextension 50104 Customer extends "Customer Card"
             {
                 ApplicationArea = All;
             }
-            field("Consignment A/C  "; Rec."Consignment A/C")
+            field("Consignment A/C  "; Rec."Consignment Account")
             {
                 ApplicationArea = All;
             }
-            field("Author No."; Rec."Author No.")
+            field("Author No."; Rec."Author")
             {
                 Lookup = true;
                 LookupPageId = "Author List";
@@ -34,8 +34,10 @@ pageextension 50104 Customer extends "Customer Card"
                 var
                     AuthorRec: Record Authors;
                 begin
-                    if AuthorRec.Get(Rec."Author No.") then begin
+                    if AuthorRec.Get(Rec."Author") then begin
                         Rec."Author Name" := AuthorRec."Author Name";
+                        Rec."Author Address" := AuthorRec.Address;
+                        Rec."Author Address 2" := AuthorRec."Address 2";
                     end;
                 end;
             }
