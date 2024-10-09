@@ -1,7 +1,7 @@
-page 50101 "Format Master"
+page 50101 "Item Format"
 {
     ApplicationArea = All;
-    Caption = 'Format Master';
+    Caption = 'Item Format';
     PageType = List;
     SourceTable = "Item Format";
     UsageCategory = Lists;

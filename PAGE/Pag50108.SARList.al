@@ -1,10 +1,13 @@
 page 50108 "SAR List"
 {
-    ApplicationArea = All;
-    Caption = 'SAR List';
     PageType = List;
     SourceTable = "SAR Header";
     UsageCategory = Lists;
+    ApplicationArea = All;
+    Caption = 'SAR List';
+    CardPageID = "SAR Card";
+    PromotedActionCategories = 'New,Process,Report,New Document,Vendor,Navigate';
+    RefreshOnActivate = true;
 
     layout
     {
@@ -16,15 +19,6 @@ page 50108 "SAR List"
                 {
                     DrillDown = true;
                     ShowMandatory = true;
-                    // DrillDownPageId = "SAR List";
-
-                    trigger OnDrillDown()
-                    var
-                        Cust: Record "SAR Header";
-                    begin
-                        Cust.Get(Rec."SAR No.");
-                        Page.Run(Page::"SAR List", Cust);
-                    end;
                 }
                 field("Item No."; Rec."Item No.")
                 {
@@ -36,7 +30,6 @@ page 50108 "SAR List"
                 }
                 field(Quantity; Rec.Quantity)
                 {
-
                 }
                 field("Unit Cost"; Rec."Unit Cost")
                 {

@@ -2,9 +2,9 @@ page 50109 "SAR Card"
 {
     ApplicationArea = All;
     Caption = 'SAR Card';
-    PageType = Card;
-    SourceTable = "SAR Line";
-    AutoSplitKey = true;
+    PageType = Document;
+    SourceTable = "SAR Header";
+
 
     layout
     {
@@ -16,42 +16,39 @@ page 50109 "SAR Card"
 
                 field("SAR No."; Rec."SAR No.")
                 {
+                    DrillDown = true;
                     ShowMandatory = true;
-                }
-                field("SAR Line No."; Rec."SAR Line No.")
-                {
 
+
+                    trigger OnAssistEdit()
+                    begin
+                        if Rec.AssistEdit(xRec) then
+                            CurrPage.Update();
+                    end;
                 }
                 field("Item No."; Rec."Item No.")
                 {
-
+                    ShowMandatory = true;
                 }
-                field(Cover; Rec.Cover)
+                field("Date"; Rec."Date")
                 {
-
+                    ShowMandatory = true;
                 }
                 field(Quantity; Rec.Quantity)
                 {
-                    BlankZero = true;
-                }
-                field(Currency; Rec.Currency)
-                {
-                    TableRelation = Currency;
-                }
-                field("Currency Factor"; Rec."Currency Factor")
-                {
 
                 }
-                field(Amount; Rec.Amount)
+                field("Unit Cost"; Rec."Unit Cost")
                 {
-                    BlankZero = true;
-
                 }
-                field("Amount (LCY)"; Rec."Amount (LCY)")
+                field("Average Cost"; Rec."Average Cost")
                 {
-                    BlankZero = true;
-
                 }
+            }
+            part("SAR Lines"; "SAR Line")
+            {
+                ApplicationArea = Basic, Suite;
+                SubPageLink = "SAR No." = FIELD("SAR No.");
             }
         }
     }

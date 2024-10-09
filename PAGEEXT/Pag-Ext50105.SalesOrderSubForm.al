@@ -1,4 +1,4 @@
-pageextension 50106 "SalesLine(Pub Code)" extends "Sales Order Subform"
+pageextension 50105 "Sales Line" extends "Sales Order Subform"
 {
     layout
     {

@@ -48,7 +48,7 @@ pageextension 50100 Item extends "Item Card"
             {
                 ApplicationArea = All;
                 Lookup = true;
-                LookupPageId = "Format Master";
+                LookupPageId = "Item Format";
             }
             field("Discount (%)"; Rec."Disount (%)")
             {
@@ -114,6 +114,72 @@ pageextension 50100 Item extends "Item Card"
             {
                 ApplicationArea = All;
                 Editable = false;
+            }
+        }
+
+    }
+    actions
+    {
+        addfirst(processing)
+        {
+            action("Item Author")
+            {
+                ApplicationArea = all;
+                Caption = 'Item Author';
+                Image = LedgerBook;
+                Promoted = true;
+                PromotedIsBig = true;
+                PromotedCategory = Process;
+                RunObject = Page "Item Author";
+                RunPageLink = "Item No." = field("No.");
+            }
+        }
+
+        addafter("Item Author")
+        {
+            action("Item Royalty")
+            {
+                ApplicationArea = all;
+                Caption = 'Item Royalty';
+                Image = ItemLedger;
+                Promoted = true;
+                PromotedIsBig = true;
+                PromotedCategory = Process;
+                RunObject = Page "Item Royalty";
+                RunPageLink = "Item No." = field("No.");
+            }
+
+            action("Item Commission")
+            {
+                ApplicationArea = all;
+                Caption = 'Item Commission';
+                Image = ItemCosts;
+                Promoted = true;
+                PromotedCategory = Process;
+                RunObject = Page "Item Commission";
+                RunPageLink = "Item No." = field("No.");
+            }
+
+            action("Related Item")
+            {
+                ApplicationArea = all;
+                Caption = 'Related Item';
+                Image = Item;
+                Promoted = true;
+                PromotedCategory = Process;
+                RunObject = Page "Related Item";
+                RunPageLink = "Item No." = field("No.");
+            }
+
+            action("SAR List")
+            {
+                ApplicationArea = all;
+                Caption = 'SAR List';
+                Image = Report;
+                Promoted = true;
+                PromotedCategory = Process;
+                RunObject = Page "SAR List";
+                RunPageLink = "SAR No." = field("No.");
             }
         }
     }

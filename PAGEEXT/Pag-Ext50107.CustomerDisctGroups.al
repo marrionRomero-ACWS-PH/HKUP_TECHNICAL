@@ -1,4 +1,4 @@
-pageextension 50111 "Customer Discount Groups" extends "Customer Disc. Groups"
+pageextension 50107 "Customer Discount Groups" extends "Customer Disc. Groups"
 {
     layout
     {
