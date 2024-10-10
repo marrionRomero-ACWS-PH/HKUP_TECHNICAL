@@ -2,11 +2,15 @@ tableextension 50105 "SalesLine(Pub Code)" extends "Sales Line"
 {
     fields
     {
-        field(50102; "FEO Code"; Code[20])
+        field(50100; "FEO Code"; Code[20])
         {
             Caption = 'FEO Code';
             Editable = false;
             TableRelation = Item."FEO Code";
+        }
+        field(50101; "Bulk Purchase"; Boolean)
+        {
+            Caption = 'FEO Code';
         }
     }
 

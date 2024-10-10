@@ -154,6 +154,7 @@ pageextension 50100 Item extends "Item Card"
                 ApplicationArea = all;
                 Caption = 'Item Commission';
                 Image = ItemCosts;
+                PromotedIsBig = true;
                 Promoted = true;
                 PromotedCategory = Process;
                 RunObject = Page "Item Commission";
@@ -166,6 +167,7 @@ pageextension 50100 Item extends "Item Card"
                 Caption = 'Related Item';
                 Image = Item;
                 Promoted = true;
+                PromotedIsBig = true;
                 PromotedCategory = Process;
                 RunObject = Page "Related Item";
                 RunPageLink = "Item No." = field("No.");
@@ -177,6 +179,7 @@ pageextension 50100 Item extends "Item Card"
                 Caption = 'SAR List';
                 Image = Report;
                 Promoted = true;
+                PromotedIsBig = true;
                 PromotedCategory = Process;
                 RunObject = Page "SAR List";
                 RunPageLink = "SAR No." = field("No.");

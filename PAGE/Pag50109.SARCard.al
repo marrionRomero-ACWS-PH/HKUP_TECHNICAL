@@ -2,7 +2,7 @@ page 50109 "SAR Card"
 {
     ApplicationArea = All;
     Caption = 'SAR Card';
-    PageType = Document;
+    PageType = Card;
     SourceTable = "SAR Header";
 
 
@@ -19,7 +19,6 @@ page 50109 "SAR Card"
                     DrillDown = true;
                     ShowMandatory = true;
 
-
                     trigger OnAssistEdit()
                     begin
                         if Rec.AssistEdit(xRec) then
@@ -29,6 +28,7 @@ page 50109 "SAR Card"
                 field("Item No."; Rec."Item No.")
                 {
                     ShowMandatory = true;
+
                 }
                 field("Date"; Rec."Date")
                 {
@@ -36,7 +36,6 @@ page 50109 "SAR Card"
                 }
                 field(Quantity; Rec.Quantity)
                 {
-
                 }
                 field("Unit Cost"; Rec."Unit Cost")
                 {
@@ -47,7 +46,7 @@ page 50109 "SAR Card"
             }
             part("SAR Lines"; "SAR Line")
             {
-                ApplicationArea = Basic, Suite;
+                ApplicationArea = all;
                 SubPageLink = "SAR No." = FIELD("SAR No.");
             }
         }

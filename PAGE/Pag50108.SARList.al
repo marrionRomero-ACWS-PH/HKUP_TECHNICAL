@@ -17,7 +17,6 @@ page 50108 "SAR List"
             {
                 field("SAR No."; Rec."SAR No.")
                 {
-                    DrillDown = true;
                     ShowMandatory = true;
                 }
                 field("Item No."; Rec."Item No.")

@@ -1,19 +1,8 @@
-pageextension 50104 "Sales Order" extends "Sales Order"
+pageextension 50113 "Sales Orders" extends "Sales Order List"
 {
-    layout
-    {
-        addlast(General)
-        {
-            field("Gratis Invoice"; Rec."Gratis Invoice")
-            {
-                Caption = 'Gratis Invoice';
-                ApplicationArea = all;
-            }
-        }
-    }
     actions
     {
-        addlast(Processing)
+        addlast("&Order Confirmation")
         {
             action("Warehouse Shipped")
             {

@@ -14,6 +14,7 @@ table 50107 "SAR Header"
                 NoSeries: Codeunit "No. Series";
 
             begin
+                Reset();
                 if "SAR No." <> xRec."SAR No." then begin
                     SARSetup.Get();
                     NoSeries.TestManual(SARSetup."SAR No.");
@@ -56,8 +57,14 @@ table 50107 "SAR Header"
             Clustered = true;
         }
     }
+    fieldgroups
+    {
+        fieldgroup(DropDown; "SAR No.", "Item No.", Date)
+        {
+        }
+    }
 
-    procedure AssistEdit(OldAuth: Record "SAR Header"): Boolean
+    procedure AssistEdit(OldSAR: Record "SAR Header"): Boolean
     var
         SARSetup: Record "Inventory Setup";
         SAR: Record "SAR Header";
@@ -67,7 +74,7 @@ table 50107 "SAR Header"
         SAR := Rec;
         SARSetup.Get();
         SARSetup.TestField("SAR No.");
-        if NoSeries.LookupRelatedNoSeries(SARSetup."SAR No.", OldAuth."No. Series", SAR."No. Series") then begin
+        if NoSeries.LookupRelatedNoSeries(SARSetup."SAR No.", OldSAR."No. Series", SAR."No. Series") then begin
             SAR."SAR no." := NoSeries.GetNextNo(SAR."No. Series");
             Rec := SAR;
             OnAssistEditOnBeforeExit(Rec);

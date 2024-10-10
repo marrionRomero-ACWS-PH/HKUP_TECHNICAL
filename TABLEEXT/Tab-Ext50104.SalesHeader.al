@@ -13,6 +13,27 @@ tableextension 50104 "SalesOrder-GratisInvoice" extends "Sales Header"
                     SetSalesLineValuesToZero();
             end;
         }
+        field(50101; "Consignment Invoice"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50102; "Ebook"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50103; "Item Discount Tracking"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50104; "Warehouse Status"; Option)
+        {
+            DataClassification = ToBeClassified;
+            OptionMembers = "Ready to Pick",Shipped;
+        }
+        field(50105; "Bulk Purchase"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     local procedure SetSalesLineValuesToZero()
