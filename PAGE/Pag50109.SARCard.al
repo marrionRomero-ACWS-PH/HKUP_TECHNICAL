@@ -21,6 +21,7 @@ page 50109 "SAR Card"
 
                     trigger OnAssistEdit()
                     begin
+
                         if Rec.AssistEdit(xRec) then
                             CurrPage.Update();
                     end;
@@ -28,6 +29,15 @@ page 50109 "SAR Card"
                 field("Item No."; Rec."Item No.")
                 {
                     ShowMandatory = true;
+                    Lookup = true;
+                    // trigger OnValidate()
+                    // var
+                    //     SAR: Record "SAR Header";
+                    // begin
+                    //     if SAR.Get(Rec."Item No.") then begin
+                    //         Rec."Item No." := SAR."Item No.";
+                    //     end;
+                    // end;
 
                 }
                 field("Date"; Rec."Date")

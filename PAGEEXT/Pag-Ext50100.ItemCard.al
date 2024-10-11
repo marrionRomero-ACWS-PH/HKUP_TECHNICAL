@@ -13,11 +13,6 @@ pageextension 50100 Item extends "Item Card"
             {
                 ApplicationArea = All;
             }
-            field("Print Title"; Rec."Print Title")
-            {
-                ApplicationArea = All;
-                ShowMandatory = true;
-            }
             field(Publisher; Rec.Publisher)
             {
                 ApplicationArea = All;
@@ -161,10 +156,10 @@ pageextension 50100 Item extends "Item Card"
                 RunPageLink = "Item No." = field("No.");
             }
 
-            action("Related Item")
+            action("Related Items")
             {
                 ApplicationArea = all;
-                Caption = 'Related Item';
+                Caption = 'Related Items';
                 Image = Item;
                 Promoted = true;
                 PromotedIsBig = true;
@@ -186,11 +181,4 @@ pageextension 50100 Item extends "Item Card"
             }
         }
     }
-    trigger OnOpenPage()
-    var
-        AuthorCalc: Codeunit "Event Procedure";
-    begin
-        AuthorCalc.CalculateNoOfAuthors(Rec);
-    end;
-
 }

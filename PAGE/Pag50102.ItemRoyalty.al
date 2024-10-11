@@ -5,6 +5,7 @@ page 50102 "Item Royalty"
     PageType = List;
     UsageCategory = Lists;
     SourceTable = "Item Royalty";
+    AutoSplitKey = true;
 
     layout
     {
@@ -18,6 +19,7 @@ page 50102 "Item Royalty"
                 }
                 field("No."; Rec."Line No.")
                 {
+                    Visible = false;
                 }
                 field("Reached Discount %"; Rec."Reached Discount %")
                 {

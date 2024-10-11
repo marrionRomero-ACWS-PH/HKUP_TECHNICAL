@@ -24,13 +24,16 @@ page 50105 "Item Author"
                 }
                 field("Author Code"; Rec."Author Code")
                 {
+                    DrillDown = true;
+                    DrillDownPageId = "Author Card";
+
                     trigger OnValidate()
                     var
                         AuthorRec: Record Authors;
                     begin
                         // When Author No. is selected, auto-fill Author Name
                         if AuthorRec.Get(Rec."Author Code") then begin
-                            Rec."Author Name" := AuthorRec."Author Name";
+                            Rec."Author Name" := AuthorRec."Name";
                         end;
                     end;
                 }

@@ -142,24 +142,20 @@ tableextension 50100 Item extends Item
         {
             Caption = 'Parent Item No.';
             DataClassification = ToBeClassified;
-            // TableRelation =
+            TableRelation = Item."No.";
         }
-        field(50122; "Print Title"; Text[100])
-        {
-            Caption = 'Print Title';
-            DataClassification = ToBeClassified;
-        }
-        field(50123; "No. of Authors"; Integer)
+        field(50122; "No. of Authors"; Integer)
         {
             Caption = 'No. of Authors';
             DataClassification = ToBeClassified;
         }
-        field(50124; "No. of SAR Documents"; Integer)
+        field(50123; "No. of SAR Documents"; Integer)
         {
             Caption = 'No. of SAR Documents';
             DataClassification = ToBeClassified;
         }
     }
+
     trigger OnInsert()
     begin
         "Created On" := Today;

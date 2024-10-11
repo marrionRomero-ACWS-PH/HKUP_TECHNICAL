@@ -17,7 +17,7 @@ table 50104 "Item Author"
         field(3; "Author Code"; Code[20])
         {
             Caption = 'Author Code';
-            TableRelation = Authors."Author No.";
+            TableRelation = Authors;
         }
         field(4; "Author Name"; Text[250])
         {

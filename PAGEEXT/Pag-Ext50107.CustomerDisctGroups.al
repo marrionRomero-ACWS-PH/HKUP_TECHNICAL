@@ -11,6 +11,7 @@ pageextension 50107 "Customer Discount Groups" extends "Customer Disc. Groups"
             field("Line No."; Rec."Line No.")
             {
                 ApplicationArea = All;
+                Visible = false;
             }
             field("Title"; Rec."Title")
             {

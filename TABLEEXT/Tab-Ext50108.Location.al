@@ -6,6 +6,7 @@ tableextension 50108 Locations extends Location
         {
             Caption = 'Customer No.';
             DataClassification = ToBeClassified;
+            TableRelation = Customer;
         }
         field(50101; "HKUP Warehouse"; Boolean)
         {

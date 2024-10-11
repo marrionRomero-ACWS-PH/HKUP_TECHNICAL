@@ -7,7 +7,7 @@ tableextension 50103 Customer extends Customer
             Caption = 'Remarks';
             DataClassification = ToBeClassified;
         }
-        field(50114; "Sales Area"; Text[20])
+        field(50114; "Sales Area"; Text[50])
         {
             Caption = 'Sales Area';
             DataClassification = ToBeClassified;

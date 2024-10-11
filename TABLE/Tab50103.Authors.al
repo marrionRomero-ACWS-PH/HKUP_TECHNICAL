@@ -1,16 +1,16 @@
 table 50103 Authors
 {
     Caption = 'Authors';
-    DataCaptionFields = "Author No.", "Author Name";
+    DataCaptionFields = "No.", "Name";
     DataClassification = ToBeClassified;
     DrillDownPageID = "Author List";
     LookupPageID = "Author List";
 
     fields
     {
-        field(1; "Author No."; Code[20])
+        field(1; "No."; Code[20])
         {
-            Caption = 'Author No.';
+            Caption = 'No.';
             DataClassification = ToBeClassified;
             trigger OnValidate()
             var
@@ -18,21 +18,21 @@ table 50103 Authors
                 NoSeries: Codeunit "No. Series";
 
             begin
-                if "Author No." <> xRec."Author No." then begin
+                if "No." <> xRec."No." then begin
                     PurchSetup.Get();
                     NoSeries.TestManual(PurchSetup."Author No.'s");
                     "No. Series" := '';
                 end;
             end;
         }
-        field(2; "Author Name"; Text[100])
+        field(2; "Name"; Text[250])
         {
-            Caption = 'Author Name';
+            Caption = 'Name';
             DataClassification = ToBeClassified;
         }
-        field(3; "Recipient No."; Code[20])
+        field(3; "Recipient"; Code[50])
         {
-            Caption = 'Recipient No.';
+            Caption = 'Recipient';
             DataClassification = ToBeClassified;
             // TableRelation = Vendor."No." WHERE("Recipient" = FILTER(true));
             TableRelation = Vendor where(Recipient = const(true));
@@ -42,17 +42,21 @@ table 50103 Authors
             Caption = 'Address';
             DataClassification = ToBeClassified;
         }
-        field(5; "Address 2"; Text[50])
+        field(5; "Address 2"; Text[100])
         {
             Caption = 'Address 2';
             DataClassification = ToBeClassified;
         }
-        field(6; "Recipient Name"; Text[50])
+        field(6; "Recipient Name"; Text[100])
         {
             Caption = 'Recipient Name';
             DataClassification = ToBeClassified;
         }
-        field(7; "No. Series"; Code[20])
+        field(7; "Name 2"; Text[250])
+        {
+            Caption = 'Name 2';
+        }
+        field(8; "No. Series"; Code[20])
         {
             Caption = 'No. Series';
             Editable = false;
@@ -61,7 +65,7 @@ table 50103 Authors
     }
     keys
     {
-        key(PK; "Author No.")
+        key(PK; "No.")
         {
             Clustered = true;
         }
@@ -70,7 +74,7 @@ table 50103 Authors
     // Define a FieldGroup for the lookup
     fieldgroups
     {
-        fieldgroup(DropDown; "Author No.", "Author Name") // Display both fields in the lookup
+        fieldgroup(DropDown; "No.", "Name") // Display both fields in the lookup
         {
         }
     }
@@ -85,7 +89,7 @@ table 50103 Authors
         PurchSetup.Get();
         PurchSetup.TestField("Author No.'s");
         if NoSeries.LookupRelatedNoSeries(PurchSetup."Author No.'s", OldAuth."No. Series", Auth."No. Series") then begin
-            Auth."Author No." := NoSeries.GetNextNo(Auth."No. Series");
+            Auth."No." := NoSeries.GetNextNo(Auth."No. Series");
             Rec := Auth;
             OnAssistEditOnBeforeExit(Rec);
             exit(true);
@@ -105,22 +109,22 @@ table 50103 Authors
         if IsHandled then
             exit;
 
-        if "Author No." = '' then begin
+        if "No." = '' then begin
             PurchSetup.Get();
             PurchSetup.TestField("Author No.'s");
-            NoSeriesMgt.RaiseObsoleteOnBeforeInitSeries(PurchSetup."Author No.'s", xRec."No. Series", 0D, "Author No.", "No. Series", IsHandled);
+            NoSeriesMgt.RaiseObsoleteOnBeforeInitSeries(PurchSetup."Author No.'s", xRec."No. Series", 0D, "No.", "No. Series", IsHandled);
 
             if not IsHandled then begin
                 "No. Series" := PurchSetup."Author No.'s";
                 if NoSeries.AreRelated("No. Series", xRec."No. Series") then
                     "No. Series" := xRec."No. Series";
-                "Author No." := NoSeries.GetNextNo("No. Series");
+                "No." := NoSeries.GetNextNo("No. Series");
                 Author.ReadIsolation(IsolationLevel::ReadUncommitted);
-                Author.SetLoadFields("Author No.");
-                while Author.Get("Author No.") do
-                    "Author No." := NoSeries.GetNextNo("No. Series");
+                Author.SetLoadFields("No.");
+                while Author.Get("No.") do
+                    "No." := NoSeries.GetNextNo("No. Series");
 
-                NoSeriesMgt.RaiseObsoleteOnAfterInitSeries("No. Series", PurchSetup."Author No.'s", 0D, "Author No.");
+                NoSeriesMgt.RaiseObsoleteOnAfterInitSeries("No. Series", PurchSetup."Author No.'s", 0D, "No.");
             end;
         end;
     end;

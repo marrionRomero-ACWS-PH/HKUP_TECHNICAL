@@ -8,7 +8,7 @@ table 50106 "Related Item"
         field(1; "Item No."; Code[20])
         {
             Caption = 'Item No.';
-            TableRelation = Item;
+            TableRelation = Item."No.";
         }
         field(2; "Related Item No."; Code[20])
         {
@@ -30,5 +30,9 @@ table 50106 "Related Item"
         {
             Clustered = true;
         }
+    }
+    fieldgroups
+    {
+
     }
 }

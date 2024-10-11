@@ -9,7 +9,7 @@ table 50108 "SAR Line"
         field(1; "SAR No."; Code[20])
         {
             Caption = 'SAR No.';
-            TableRelation = "SAR Header";
+            TableRelation = "SAR Header"."SAR No.";
         }
         field(2; "SAR Line No."; Integer)
         {
@@ -19,6 +19,8 @@ table 50108 "SAR Line"
         field(3; "Item No."; Code[20])
         {
             Caption = 'Item No.';
+            Editable = false;
+            TableRelation = Item."No.";
         }
         field(4; Cover; Option)
         {
@@ -55,4 +57,12 @@ table 50108 "SAR Line"
             Clustered = true;
         }
     }
+    trigger OnInsert()
+    var
+        SARHeader: Record "SAR Header";
+    begin
+        if SARHeader.Get("SAR No.") then begin
+            "Item No." := SARHeader."Item No.";
+        end;
+    end;
 }

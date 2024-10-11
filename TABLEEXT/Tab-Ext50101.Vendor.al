@@ -38,19 +38,10 @@ tableextension 50101 Vendor extends Vendor
             Caption = 'ID/Passport No.';
             DataClassification = ToBeClassified;
         }
-        field(50108; "Share Commission"; Text[250])
+        field(50108; "Share Commission"; Decimal)
         {
             Caption = 'Share Commission';
             DataClassification = ToBeClassified;
         }
     }
-
-    // local procedure ValidateVendorTypes(): Boolean
-    // begin
-    //     if not Rec."Publisher" and not Rec."Supplier" and not Rec."Recipient" then begin
-    //         Error('Please select at least one type of vendor (i.e. Supplier/Publisher/Recipient).');
-    //         exit(false);
-    //     end;
-    //     exit(true);
-    // end;
 }

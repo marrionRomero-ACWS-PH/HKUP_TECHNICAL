@@ -14,6 +14,7 @@ table 50101 "Item Format"
         {
             Caption = 'Description';
             DataClassification = ToBeClassified;
+            NotBlank = true;
         }
     }
     keys

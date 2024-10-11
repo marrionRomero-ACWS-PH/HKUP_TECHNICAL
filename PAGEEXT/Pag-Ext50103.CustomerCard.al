@@ -12,20 +12,28 @@ pageextension 50103 Customer extends "Customer Card"
         }
         addlast(General)
         {
+            field("Sales Area"; Rec."Sales Area")
+            {
+                ApplicationArea = All;
+            }
+            field("Consignment Account  "; Rec."Consignment Account")
+            {
+                ApplicationArea = All;
+            }
+            field("Sales Area  "; Rec."Sales Area")
+            {
+                ApplicationArea = All;
+            }
+            field("Discount %"; Rec."Discount %")
+            {
+                ApplicationArea = All;
+            }
             field("Remarks"; Rec."Remarks")
             {
                 ApplicationArea = All;
                 MultiLine = true;
             }
-            field("Sales Area"; Rec."Sales Area")
-            {
-                ApplicationArea = All;
-            }
-            field("Consignment A/C  "; Rec."Consignment Account")
-            {
-                ApplicationArea = All;
-            }
-            field("Author No."; Rec."Author")
+            field("Author"; Rec."Author")
             {
                 Lookup = true;
                 LookupPageId = "Author List";
@@ -35,17 +43,21 @@ pageextension 50103 Customer extends "Customer Card"
                     AuthorRec: Record Authors;
                 begin
                     if AuthorRec.Get(Rec."Author") then begin
-                        Rec."Author Name" := AuthorRec."Author Name";
-                        Rec."Author Address" := AuthorRec.Address;
-                        Rec."Author Address 2" := AuthorRec."Address 2";
+                        Rec."Name" := AuthorRec."Name";
+                        Rec."Address" := AuthorRec.Address;
+                        Rec."Address 2" := AuthorRec."Address 2";
                     end;
                 end;
             }
-            field("Author name"; Rec."Author Name")
+            field("Name."; Rec."Name")
             {
                 ApplicationArea = All;
             }
-            field("Discount %"; Rec."Discount %")
+            field("Address."; Rec.Address)
+            {
+                ApplicationArea = All;
+            }
+            field("Address 2."; Rec."Address 2")
             {
                 ApplicationArea = All;
             }

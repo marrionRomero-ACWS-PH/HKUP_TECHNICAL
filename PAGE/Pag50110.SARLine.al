@@ -10,7 +10,7 @@ page 50110 "SAR Line"
     {
         area(Content)
         {
-            repeater(General)
+            repeater(Group)
             {
                 field("SAR No."; Rec."SAR No.")
                 {
@@ -21,15 +21,7 @@ page 50110 "SAR Line"
                 }
                 field("Item No."; Rec."Item No.")
                 {
-                    Lookup = true;
-                    trigger OnValidate()
-                    var
-                        SAR: Record "SAR Header";
-                    begin
-                        if SAR.Get(Rec."Item No.") then begin
-                            Rec."Item No." := SAR."Item No.";
-                        end;
-                    end;
+
                 }
                 field(Cover; Rec.Cover)
                 {

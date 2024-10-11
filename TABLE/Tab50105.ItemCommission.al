@@ -13,6 +13,7 @@ table 50105 "Item Commission"
         field(2; "Line No."; Integer)
         {
             Caption = 'Line No.';
+            AutoIncrement = true;
         }
         field(3; "Commission Method"; Option)
         {

@@ -13,7 +13,7 @@ page 50104 "Author Card"
             {
                 Caption = 'General';
 
-                field("Author No."; Rec."Author No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = All;
                     Visible = NoFieldVisible;
@@ -24,11 +24,15 @@ page 50104 "Author Card"
                             CurrPage.Update();
                     end;
                 }
-                field("Author Name"; Rec."Author Name")
+                field("Name"; Rec."Name")
                 {
                     ApplicationArea = All;
                 }
-                field("Recipient No."; Rec."Recipient No.")
+                field("Name 2"; Rec."Name 2")
+                {
+                    ApplicationArea = All;
+                }
+                field(" No."; Rec."No.")
                 {
                     ApplicationArea = All;
                     Importance = Additional;
@@ -37,7 +41,7 @@ page 50104 "Author Card"
                         VendorRec: Record Vendor;
                     begin
                         // When Recipient No. is selected, auto-fill Recipient Name
-                        if VendorRec.Get(Rec."Recipient No.") then begin
+                        if VendorRec.Get(Rec."Recipient") then begin
                             Rec."Recipient Name" := VendorRec.Name;
                         end;
                     end;
