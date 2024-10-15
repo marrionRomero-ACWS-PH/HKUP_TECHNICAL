@@ -49,18 +49,6 @@ pageextension 50103 Customer extends "Customer Card"
                     end;
                 end;
             }
-            field("Name."; Rec."Name")
-            {
-                ApplicationArea = All;
-            }
-            field("Address."; Rec.Address)
-            {
-                ApplicationArea = All;
-            }
-            field("Address 2."; Rec."Address 2")
-            {
-                ApplicationArea = All;
-            }
         }
     }
 }

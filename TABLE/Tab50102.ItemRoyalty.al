@@ -19,7 +19,7 @@ table 50102 "Item Royalty"
         {
             Caption = 'Exclude Royalty if Unit Cost Exceeds Sales Price';
         }
-        field(4; "Line No."; Code[20])
+        field(4; "Line No."; Integer)
         {
             Caption = 'Line No.';
         }

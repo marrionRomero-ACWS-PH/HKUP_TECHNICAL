@@ -147,12 +147,22 @@ tableextension 50100 Item extends Item
         field(50122; "No. of Authors"; Integer)
         {
             Caption = 'No. of Authors';
-            DataClassification = ToBeClassified;
+            FieldClass = FlowField;
+            CalcFormula = Count("Item Author" where("Item No." = Field("No.")));
         }
         field(50123; "No. of SAR Documents"; Integer)
         {
             Caption = 'No. of SAR Documents';
-            DataClassification = ToBeClassified;
+            FieldClass = FlowField;
+            CalcFormula = Count("SAR Header" where("Item No." = Field("No.")));
+            // trigger OnLookup()
+            // var
+            //     SARRec: Record "SAR Header";
+            // begin
+            //     // Logic to count the number of SAR Documents for the current item.
+            //     SARRec.SetRange("Item No.", Rec."No.");
+            //     Rec."No. of SAR Documents" := SARRec.Count;
+            // end;
         }
     }
 

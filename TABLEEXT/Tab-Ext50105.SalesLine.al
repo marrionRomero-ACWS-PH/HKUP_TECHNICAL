@@ -10,7 +10,7 @@ tableextension 50105 "SalesLine(Pub Code)" extends "Sales Line"
         }
         field(50101; "Bulk Purchase"; Boolean)
         {
-            Caption = 'FEO Code';
+            Caption = 'Bulk Purchase';
         }
     }
 

@@ -20,7 +20,7 @@ table 50108 "SAR Line"
         {
             Caption = 'Item No.';
             Editable = false;
-            TableRelation = Item."No.";
+            TableRelation = Item;
         }
         field(4; Cover; Option)
         {

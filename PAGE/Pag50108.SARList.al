@@ -13,19 +13,19 @@ page 50108 "SAR List"
     {
         area(Content)
         {
-            repeater(General)
+            repeater(group)
             {
                 field("SAR No."; Rec."SAR No.")
                 {
-                    ShowMandatory = true;
+                    // ShowMandatory = true;
                 }
                 field("Item No."; Rec."Item No.")
                 {
-                    ShowMandatory = true;
+                    // ShowMandatory = true;
                 }
                 field("Date"; Rec."Date")
                 {
-                    ShowMandatory = true;
+                    // ShowMandatory = true;
                 }
                 field(Quantity; Rec.Quantity)
                 {

@@ -16,8 +16,9 @@ page 50109 "SAR Card"
 
                 field("SAR No."; Rec."SAR No.")
                 {
-                    DrillDown = true;
                     ShowMandatory = true;
+                    DrillDown = true;
+                    DrillDownPageId = "SAR List";
 
                     trigger OnAssistEdit()
                     begin
@@ -29,7 +30,6 @@ page 50109 "SAR Card"
                 field("Item No."; Rec."Item No.")
                 {
                     ShowMandatory = true;
-                    Lookup = true;
                     // trigger OnValidate()
                     // var
                     //     SAR: Record "SAR Header";
