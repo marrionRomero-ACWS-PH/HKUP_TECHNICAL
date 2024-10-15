@@ -17,6 +17,7 @@ page 50104 "Author Card"
                 {
                     ApplicationArea = All;
                     Visible = NoFieldVisible;
+                    ShowMandatory = true;
 
                     trigger OnAssistEdit()
                     begin
@@ -26,11 +27,13 @@ page 50104 "Author Card"
                 }
                 field("Name"; Rec."Name")
                 {
+                    ShowMandatory = true;
                     ApplicationArea = All;
                 }
                 field("Name 2"; Rec."Name 2")
                 {
                     ApplicationArea = All;
+                    MultiLine = true;
                 }
                 field(" No."; Rec."No.")
                 {

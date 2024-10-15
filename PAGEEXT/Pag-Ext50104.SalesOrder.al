@@ -19,6 +19,7 @@ pageextension 50104 "Sales Order" extends "Sales Order"
             {
                 Caption = 'Warehouse Shipped';
                 Promoted = true;
+                Image = Shipment;
                 PromotedCategory = Process;
                 ApplicationArea = All;
 

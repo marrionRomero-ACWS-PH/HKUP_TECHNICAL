@@ -2,7 +2,7 @@ pageextension 50111 "Posted Sales Invoices" extends "Posted Sales Invoices"
 {
     layout
     {
-        addlast(content)
+        addafter(Corrective)
         {
             field("Gratis Invoice"; Rec."Gratis Invoice")
             {

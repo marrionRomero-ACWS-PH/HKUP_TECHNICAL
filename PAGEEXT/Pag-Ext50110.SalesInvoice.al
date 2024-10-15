@@ -2,7 +2,7 @@ pageextension 50110 "Sales Invoice" extends "Sales Invoice"
 {
     layout
     {
-        addlast(content)
+        addlast(General)
         {
             field("Gratis Invoice"; Rec."Gratis Invoice")
             {

@@ -11,6 +11,7 @@ tableextension 50107 "Customer Discount Groups" extends "Customer Discount Group
         {
             Caption = 'Line No.';
             DataClassification = ToBeClassified;
+
         }
         field(50102; Title; Option)
         {

@@ -1,4 +1,4 @@
-tableextension 50104 "SalesOrder-GratisInvoice" extends "Sales Header"
+tableextension 50104 "Sales Header" extends "Sales Header"
 {
     fields
     {
