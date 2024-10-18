@@ -30,7 +30,7 @@ page 50102 "Item Royalty"
                 field("Percentage %"; Rec."Percentage %")
                 {
                 }
-                field("Exclude Royalty if Unit Cost Exceeds Sales Price"; Rec."Exclude Royalty if Unit Cost Exceeds Sales Price")
+                field("Exclude Royalty if Unit Cost Exceeds Sales Price"; Rec."Exclude Royalty")
                 {
                 }
             }

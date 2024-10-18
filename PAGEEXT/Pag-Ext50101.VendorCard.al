@@ -3,6 +3,13 @@ pageextension 50101 Vendor extends "Vendor Card"
 {
     layout
     {
+        addafter(Name)
+        {
+            field("Name2";Rec."Name 2")
+            {
+            ApplicationArea=all;
+            }
+        }
         addlast(General)
         {
 
@@ -17,12 +24,6 @@ pageextension 50101 Vendor extends "Vendor Card"
 
             field(Recipient; Rec.Recipient)
             {
-                ApplicationArea = All;
-            }
-            field("Full Name"; Rec."Name")
-            {
-                Caption='Full Name';
-                ShowMandatory=true;
                 ApplicationArea = All;
             }
             field("Sales Area"; Rec."Sales Area")
@@ -42,7 +43,11 @@ pageextension 50101 Vendor extends "Vendor Card"
             {
                 ApplicationArea = All;
                 ExtendedDatatype=Masked;
-            }   
+            }  
+            field("Vendor Type";Rec."Vendor Type") 
+            {
+                ApplicationArea=all;
+            }
         }
     }
 

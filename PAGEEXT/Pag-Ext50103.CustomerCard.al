@@ -33,7 +33,7 @@ pageextension 50103 Customer extends "Customer Card"
                 ApplicationArea = All;
                 MultiLine = true;
             }
-            field("Author"; Rec."Author")
+            field("Author"; Rec."Author No.")
             {
                 Lookup = true;
                 LookupPageId = "Author List";
@@ -42,12 +42,14 @@ pageextension 50103 Customer extends "Customer Card"
                 var
                     AuthorRec: Record Authors;
                 begin
-                    if AuthorRec.Get(Rec."Author") then begin
-                        Rec."Name" := AuthorRec."Name";
-                        Rec."Address" := AuthorRec.Address;
-                        Rec."Address 2" := AuthorRec."Address 2";
+                    if AuthorRec.Get(Rec."Author No.") then begin
+                        Rec."Author Name" := AuthorRec."Author Name";
                     end;
                 end;
+            }
+            field("Author Name"; Rec."Author Name")
+            {
+                ApplicationArea = all;
             }
         }
     }

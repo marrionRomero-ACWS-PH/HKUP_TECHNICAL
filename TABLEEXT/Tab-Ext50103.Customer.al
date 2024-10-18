@@ -23,15 +23,15 @@ tableextension 50103 Customer extends Customer
             DataClassification = ToBeClassified;
         }
 
-        field(50118; "Author"; Code[20])
+        field(50118; "Author No."; Code[20])
         {
-            Caption = 'Author';
+            Caption = 'Author No.';
             DataClassification = ToBeClassified;
             TableRelation = Authors;
         }
         field(50119; "Author Name"; Code[100])
         {
-            Caption = 'Name';
+            Caption = 'Author Name';
             DataClassification = ToBeClassified;
         }
         field(50120; "Discount %"; Integer)

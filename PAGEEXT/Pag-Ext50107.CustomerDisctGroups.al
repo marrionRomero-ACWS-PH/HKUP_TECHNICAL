@@ -2,7 +2,7 @@ pageextension 50107 "Customer Discount Groups" extends "Customer Disc. Groups"
 {
     layout
     {
-        addlast(content)
+        addafter(Description)
         {
             field("Customer No."; Rec."Customer No.")
             {

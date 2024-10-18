@@ -27,7 +27,7 @@ page 50106 "Item Commission"
                 field("Commission %"; Rec."Commission %")
                 {
                 }
-                field("Commission Effective Start Date"; Rec."Commission Effective Start Date")
+                field("Commission Effective Start Date"; Rec."Commission Start Date")
                 {
                 }
                 field("Commission Effective End Date"; Rec."Commission Effective End Date")

@@ -19,26 +19,10 @@ page 50109 "SAR Card"
                     ShowMandatory = true;
                     DrillDown = true;
                     DrillDownPageId = "SAR List";
-
-                    trigger OnAssistEdit()
-                    begin
-
-                        if Rec.AssistEdit(xRec) then
-                            CurrPage.Update();
-                    end;
                 }
                 field("Item No."; Rec."Item No.")
                 {
                     ShowMandatory = true;
-                    // trigger OnValidate()
-                    // var
-                    //     SAR: Record "SAR Header";
-                    // begin
-                    //     if SAR.Get(Rec."Item No.") then begin
-                    //         Rec."Item No." := SAR."Item No.";
-                    //     end;
-                    // end;
-
                 }
                 field("Date"; Rec."Date")
                 {

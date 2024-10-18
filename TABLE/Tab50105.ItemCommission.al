@@ -27,7 +27,7 @@ table 50105 "Item Commission"
             MinValue = 0;
             MaxValue = 100;
         }
-        field(5; "Commission Effective Start Date"; Date)
+        field(5; "Commission Start Date"; Date)
         {
             Caption = 'Commission Effective Start Date';
             DataClassification = ToBeClassified;
@@ -41,7 +41,7 @@ table 50105 "Item Commission"
 
             trigger OnValidate()
             begin
-                if "Commission Effective End Date" <= "Commission Effective Start Date" then begin
+                if "Commission Effective End Date" <= "Commission Start Date" then begin
                     Message('The "Commission Effective End Date" must be greater than the "Commission Effective Start Date".');
                     "Commission Effective End Date" := 0D; // Reset to blank if validation fails
                 end;

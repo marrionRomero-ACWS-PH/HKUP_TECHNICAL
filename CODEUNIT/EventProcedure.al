@@ -1,6 +1,5 @@
 codeunit 50100 "Event Procedure"
 {
-    SingleInstance = false;
     ///////------AUTHOR NO. VISIBILITTY START------\\\\\\\
     procedure AuthorNoIsVisible(): Boolean
     var
@@ -55,10 +54,35 @@ codeunit 50100 "Event Procedure"
         exit(NoSeriesBatch.GetNextNo(NoSeriesCode, SeriesDate, true) = '');
     end;
 
-    [IntegrationEvent(false, false)]
     local procedure OnBeforeAuthorNoIsVisible(var IsVisible: Boolean; var IsHandled: Boolean)
     begin
     end;
     ///////------AUTHOR NO. VISIBILITTY END------\\\\\\\
 
+    ///////------CUSTOM "No.SERIESMGT"  START------\\\\\\\
+    /////////////////////////////BEFORE\\\\\\\\\\\\\\\\\\\\\\\\\\
+    procedure RaiseObsoleteOnBeforeInitSeries(var DefaultNoSeriesCode: Code[20]; OldNoSeriesCode: Code[20]; NewDate: Date; var NewNo: Code[20]; var NewNoSeriesCode: Code[20]; var IsHandled: Boolean)
+    var
+        GlobalNoSeries: Record "No. Series";
+        GlobalNoSeriesCode: Code[20];
+    begin
+        OnBeforeInitSeries(DefaultNoSeriesCode, OldNoSeriesCode, NewDate, NewNo, NewNoSeriesCode, GlobalNoSeries, IsHandled, GlobalNoSeriesCode);
+    end;
+
+    local procedure OnBeforeInitSeries(var DefaultNoSeriesCode: Code[20]; OldNoSeriesCode: Code[20]; NewDate: Date; var NewNo: Code[20]; var NewNoSeriesCode: Code[20]; var NoSeries: Record "No. Series"; var IsHandled: Boolean; var NoSeriesCode: Code[20])
+    begin
+    end;
+    /////////////////////////////AFTER\\\\\\\\\\\\\\\\\\\\\\\\\\/// 
+    procedure RaiseObsoleteOnAfterInitSeries(NoSeriesCode: Code[20]; DefaultNoSeriesCode: Code[20]; NewDate: Date; var NewNo: Code[20])
+    var
+        NoSeries: Record "No. Series";
+    begin
+        if NoSeries.Get(NoSeriesCode) then;
+        OnAfterInitSeries(NoSeries, DefaultNoSeriesCode, NewDate, NewNo);
+    end;
+
+    local procedure OnAfterInitSeries(var NoSeries: Record "No. Series"; DefaultNoSeriesCode: Code[20]; NewDate: Date; var NewNo: Code[20])
+    begin
+    end;
+    ///////------CUSTOM "No.SERIESMGT"  END------\\\\\\\
 }

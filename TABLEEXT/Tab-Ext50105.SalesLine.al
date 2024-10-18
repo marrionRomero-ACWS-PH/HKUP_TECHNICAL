@@ -2,11 +2,11 @@ tableextension 50105 "SalesLine(Pub Code)" extends "Sales Line"
 {
     fields
     {
-        field(50100; "FEO Code"; Code[20])
+        field(50100; "Pub Code"; Code[20])
         {
-            Caption = 'FEO Code';
+            Caption = 'Pub Code';
             Editable = false;
-            TableRelation = Item."FEO Code";
+            TableRelation = Item."Pub Code";
         }
         field(50101; "Bulk Purchase"; Boolean)
         {
@@ -22,7 +22,7 @@ tableextension 50105 "SalesLine(Pub Code)" extends "Sales Line"
     begin
         if ("Type" = "Type"::Item) then begin
             if ItemRecord.Get("No.") then
-                "FEO Code" := Format(ItemRecord."FEO Code");
+                "Pub Code" := Format(ItemRecord."Pub Code");
         end;
 
         begin
@@ -45,13 +45,13 @@ tableextension 50105 "SalesLine(Pub Code)" extends "Sales Line"
                         if (ItemRecord."Type" <> ItemRecord."Type"::Service) and
                            (ItemRecord."Type" <> ItemRecord."Type"::"Non-Inventory") and
                            (ItemRecord."Type" = ItemRecord."Type"::Inventory) and
-                           (ItemRecord."FEO Code" <> ItemRecord."FEO Code"::"Q") then
+                           (ItemRecord."Pub Code" <> ItemRecord."Pub Code"::"Q – Ebook") then
                             Error('This is an Ebook invoice, please select an Ebook item.');
                     end;
                 end
                 else begin
                     if ItemRecord.Get("No.") then begin
-                        if (ItemRecord."FEO Code" = ItemRecord."FEO Code"::"Q") then
+                        if (ItemRecord."Pub Code" = ItemRecord."Pub Code"::"Q – Ebook") then
                             Error('This is not an Ebook invoice, please select a non-Ebook item.');
                     end;
                 end;
@@ -62,7 +62,7 @@ tableextension 50105 "SalesLine(Pub Code)" extends "Sales Line"
     trigger OnDelete()
     begin
         if ("Type" = "Type"::Item) then
-            Validate("FEO Code", '');
+            Validate("Pub Code", '');
     end;
 
 

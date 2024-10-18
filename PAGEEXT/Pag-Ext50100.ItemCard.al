@@ -9,7 +9,7 @@ pageextension 50100 Item extends "Item Card"
                 ApplicationArea = All;
             }
 
-            field("FEO Code"; Rec."FEO Code")
+            field("Pub Code"; Rec."Pub Code")
             {
                 ApplicationArea = All;
             }
@@ -43,7 +43,7 @@ pageextension 50100 Item extends "Item Card"
             {
                 ApplicationArea = All;
                 Lookup = true;
-                LookupPageId = "Item Format";
+                LookupPageId = "Format Master";
             }
             field("Discount (%)"; Rec."Disount (%)")
             {
@@ -60,7 +60,6 @@ pageextension 50100 Item extends "Item Card"
             field("Status"; Rec."Status")
             {
                 ApplicationArea = All;
-                MultiLine = true;
             }
             field("Reprint History"; Rec."Reprint History")
             {
@@ -85,7 +84,7 @@ pageextension 50100 Item extends "Item Card"
             // {
             //     ApplicationArea = All;
             // }
-            field("CRoyalty Method Calculation Description"; Rec."Royalty Method Calculation Description")
+            field("CRoyalty Method Calculation Description"; Rec."Royalty Method Description")
             {
                 ApplicationArea = All;
             }

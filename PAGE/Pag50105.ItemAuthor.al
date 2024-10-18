@@ -33,7 +33,7 @@ page 50105 "Item Author"
                     begin
                         // When Author No. is selected, auto-fill Author Name
                         if AuthorRec.Get(Rec."Author Code") then begin
-                            Rec."Author Name" := AuthorRec."Name";
+                            Rec."Author Name" := AuthorRec."Author Name";
                         end;
                     end;
                 }

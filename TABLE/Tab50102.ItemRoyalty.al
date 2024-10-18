@@ -15,7 +15,7 @@ table 50102 "Item Royalty"
             MinValue = 0;
             MaxValue = 100;
         }
-        field(3; "Exclude Royalty if Unit Cost Exceeds Sales Price"; Boolean)
+        field(3; "Exclude Royalty"; Boolean)
         {
             Caption = 'Exclude Royalty if Unit Cost Exceeds Sales Price';
         }

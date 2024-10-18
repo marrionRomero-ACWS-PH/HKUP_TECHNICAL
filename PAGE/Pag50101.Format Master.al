@@ -1,9 +1,9 @@
-page 50101 "Item Format"
+page 50101 "Format Master"
 {
     ApplicationArea = All;
-    Caption = 'Item Format';
+    Caption = 'Format Master';
     PageType = List;
-    SourceTable = "Item Format";
+    SourceTable = "Format Master";
     UsageCategory = Lists;
 
     layout
@@ -12,7 +12,7 @@ page 50101 "Item Format"
         {
             repeater(Group)
             {
-                field(Code; Rec.Code)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = all;
                 }

@@ -13,7 +13,7 @@ pageextension 50124 "Customer List" extends "Customer List"
             field(Remarks; Rec.Remarks)
             {
             }
-            field(Author; Rec.Author)
+            field(Author; Rec."Author No.")
             {
             }
         }

@@ -16,19 +16,20 @@ page 50103 "Author List"
         {
             repeater(Group)
             {
-                field("No."; Rec."No.")
+                field("No."; Rec."Author No.")
                 {
                     ApplicationArea = All;
                 }
-                field("Name"; Rec."Name")
+                field("Name"; Rec."Author Name")
                 {
                     ApplicationArea = All;
                 }
-                field("Name2"; Rec."Name 2")
+                field("Author Name 2"; Rec."Author Name 2")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
-                field("Recipient"; Rec."Recipient")
+                field("Recipient"; Rec."Recipient No.")
                 {
                     ApplicationArea = All;
                 }

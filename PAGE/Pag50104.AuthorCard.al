@@ -13,7 +13,7 @@ page 50104 "Author Card"
             {
                 Caption = 'General';
 
-                field("No."; Rec."No.")
+                field("Author No."; Rec."Author No.")
                 {
                     ApplicationArea = All;
                     Visible = NoFieldVisible;
@@ -25,26 +25,28 @@ page 50104 "Author Card"
                             CurrPage.Update();
                     end;
                 }
-                field("Name"; Rec."Name")
+                field("Author Name"; Rec."Author Name")
                 {
                     ShowMandatory = true;
                     ApplicationArea = All;
                 }
-                field("Name 2"; Rec."Name 2")
+                field("Author Name 2"; Rec."Author Name 2")
                 {
                     ApplicationArea = All;
                     MultiLine = true;
+                    Visible = false;
                 }
-                field(" No."; Rec."No.")
+                field("Recipient No."; Rec."Recipient No.")
                 {
                     ApplicationArea = All;
                     Importance = Additional;
+                    TableRelation = Vendor."No." WHERE("Recipient" = FILTER(true));
                     trigger OnValidate()
                     var
                         VendorRec: Record Vendor;
                     begin
                         // When Recipient No. is selected, auto-fill Recipient Name
-                        if VendorRec.Get(Rec."Recipient") then begin
+                        if VendorRec.Get(Rec."Recipient No.") then begin
                             Rec."Recipient Name" := VendorRec.Name;
                         end;
                     end;

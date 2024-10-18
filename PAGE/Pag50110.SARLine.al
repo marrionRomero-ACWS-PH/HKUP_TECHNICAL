@@ -21,7 +21,6 @@ page 50110 "SAR Line"
                 }
                 field("Item No."; Rec."Item No.")
                 {
-
                 }
                 field(Cover; Rec.Cover)
                 {

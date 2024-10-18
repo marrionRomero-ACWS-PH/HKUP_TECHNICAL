@@ -7,13 +7,13 @@ tableextension 50100 Item extends Item
             Caption = 'Full Title';
             DataClassification = ToBeClassified;
         }
-        field(50101; "FEO Code"; Option)
+        field(50101; "Pub Code"; Option)
         {
-            Caption = 'FEO Code';
-            OptionMembers = "A","C","G","X","Q";
+            Caption = 'Pub Code';
+            OptionMembers = "A - Academic Title","C - Commission Title","G - General Title","X - Agency Title","Q – Ebook","S – Service Charge";
             trigger OnValidate()
             begin
-                case "FEO Code" of
+                case "Pub Code" of
                     0, 1: // A - Academic Title, C - Commission Title
                         Rec."Disount (%)" := 30;
                     2, 3: // G - General Title, X - Agency Title
@@ -27,7 +27,8 @@ tableextension 50100 Item extends Item
         {
             Caption = 'Publisher';
             // TableRelation = Vendor WHERE(Type = FILTER(Publisher));
-            TableRelation = Vendor."No." WHERE("Publisher" = FILTER(true));
+            // TableRelation = Vendor."No." WHERE("Publisher" = FILTER(true));
+            TableRelation = Vendor where(Publisher = const(true));
         }
         field(50103; Series; Code[50])
         {
@@ -38,7 +39,8 @@ tableextension 50100 Item extends Item
         {
             Caption = 'Supplier';
             // TableRelation = Vendor WHERE(Type = FILTER(Supplier));
-            TableRelation = Vendor."No." WHERE("Supplier" = FILTER(true));
+            // TableRelation = Vendor."No." WHERE("Supplier" = FILTER(true));
+            TableRelation = Vendor where(Supplier = const(true));
         }
         field(50105; "Published Date"; Date)
         {
@@ -52,20 +54,19 @@ tableextension 50100 Item extends Item
             MaxValue = 9999;
             DataClassification = ToBeClassified;
         }
-        field(50118; "Format"; Option)
-        {
-            Caption = 'Format';
-            DataClassification = ToBeClassified;
-            OptionMembers = hb,pb,"eBook (ePub)","eBook (PDF)","hb (+media)","import hb","import pb","eBook (HKSO)","pb (+media)",other,"eBook (HTML)","reprint pb (new ISBN)",NA;
-
-        }
-
-        // field(50118; "Format"; Code[50])
+        // field(50118; "Format"; Option)
         // {
         //     Caption = 'Format';
         //     DataClassification = ToBeClassified;
-        //     TableRelation = "Format Master";
+        //     OptionMembers = hb,pb,"eBook (ePub)","eBook (PDF)","hb (+media)","import hb","import pb","eBook (HKSO)","pb (+media)",other,"eBook (HTML)","reprint pb (new ISBN)",NA;
         // }
+
+        field(50118; "Format"; Code[50])
+        {
+            Caption = 'Format';
+            DataClassification = ToBeClassified;
+            TableRelation = "Format Master";
+        }
         field(50107; "Disount (%)"; Integer)
         {
             Caption = 'Discount (%)';
@@ -133,7 +134,7 @@ tableextension 50100 Item extends Item
             Caption = 'No Calculation for Commission';
             DataClassification = ToBeClassified;
         }
-        field(50120; "Royalty Method Calculation Description"; Text[250])
+        field(50120; "Royalty Method Description"; Text[250])
         {
             Caption = 'Royalty Method Calculation Description';
             DataClassification = ToBeClassified;
