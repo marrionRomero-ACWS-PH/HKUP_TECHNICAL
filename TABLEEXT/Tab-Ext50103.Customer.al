@@ -1,4 +1,4 @@
-tableextension 50103 Customer extends Customer
+tableextension 50103 "Customer Extension" extends Customer
 {
     fields
     {
@@ -19,7 +19,7 @@ tableextension 50103 Customer extends Customer
         }
         field(50116; "Consignment Account"; Boolean)
         {
-            Caption = 'Consignment Account';
+            Caption = 'Consignment A/C';
             DataClassification = ToBeClassified;
         }
 

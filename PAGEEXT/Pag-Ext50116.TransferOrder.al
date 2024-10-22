@@ -4,7 +4,7 @@ pageextension 50116 "Transfer Order" extends "Transfer Order"
     {
         addlast(content)
         {
-            field("Customer No."; Rec."Customer No.")
+            field("Sell-to Customer No."; Rec."Sell-to Customer No.")
             {
 
             }

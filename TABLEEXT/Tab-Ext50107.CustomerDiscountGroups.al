@@ -1,4 +1,4 @@
-tableextension 50107 "Customer Discount Groups" extends "Customer Discount Group"
+tableextension 50107 "Customer Discount Groups Ext." extends "Customer Discount Group"
 {
     fields
     {

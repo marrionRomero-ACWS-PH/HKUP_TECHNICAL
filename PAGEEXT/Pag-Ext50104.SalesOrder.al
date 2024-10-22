@@ -38,4 +38,5 @@ pageextension 50104 "Sales Order" extends "Sales Order"
             }
         }
     }
+
 }

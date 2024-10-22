@@ -1,4 +1,4 @@
-tableextension 50105 "SalesLine(Pub Code)" extends "Sales Line"
+tableextension 50105 "Sales Line Extension" extends "Sales Line"
 {
     fields
     {

@@ -1,5 +1,6 @@
 codeunit 50100 "Event Procedure"
 {
+    TableNo = "Transfer Line";
     ///////------AUTHOR NO. VISIBILITTY START------\\\\\\\
     procedure AuthorNoIsVisible(): Boolean
     var
@@ -85,4 +86,68 @@ codeunit 50100 "Event Procedure"
     begin
     end;
     ///////------CUSTOM "No.SERIESMGT"  END------\\\\\\\
+
+    ///////------TRANSFER LINE------\\\\\\\
+    trigger OnRun()
+    begin
+    end;
+
+    var
+        GlobalTransferHeader: Record "Transfer Header";
+        GlobalField: Record "Field";
+
+    procedure GetTransferLineCaptionClass(var TransferLine: Record "Transfer Line"; FieldNumber: Integer): Text
+    begin
+        if (GlobalTransferHeader."Document Type" <> TransferLine."Document Type") or (GlobalTransferHeader."No." <> TransferLine."Document No.") then
+            if not GlobalTransferHeader.Get(TransferLine."Document Type", TransferLine."Document No.") then
+                Clear(GlobalTransferHeader);
+        case FieldNumber of
+            TransferLine.FieldNo("No."):
+                exit(StrSubstNo('3,%1', GetFieldCaption(DATABASE::"Transfer Line", FieldNumber)));
+            else begin
+                if GlobalTransferHeader."Prices Including VAT" then
+                    exit('2,1,' + GetFieldCaption(DATABASE::"Transfer Line", FieldNumber));
+                exit('2,0,' + GetFieldCaption(DATABASE::"Transfer Line", FieldNumber));
+            end;
+        end;
+    end;
+
+    local procedure GetFieldCaption(TableNumber: Integer; FieldNumber: Integer): Text
+    begin
+        if (GlobalField.TableNo <> TableNumber) or (GlobalField."No." <> FieldNumber) then
+            GlobalField.Get(TableNumber, FieldNumber);
+        exit(GlobalField."Field Caption");
+    end;
+
+    procedure SetCachedTransferHeader(TransferHeader: Record "Transfer Header")
+    begin
+        GlobalTransferHeader := TransferHeader;
+    end;
+
+    [EventSubscriber(ObjectType::Table, Database::"Transfer Header", 'OnAfterChangePricesIncludingVAT', '', true, true)]
+    local procedure TransferHeaderChangedPricesIncludingVAT(var TransferHeader: Record "Transfer Header")
+    begin
+        GlobalTransferHeader := TransferHeader;
+    end;
+
+    [EventSubscriber(ObjectType::Table, Database::"Transfer Header", 'OnAfterSetFieldsBilltoCustomer', '', true, true)]
+    local procedure UpdateTransferLineFieldsCaptionOnAfterSetFieldsBilltoCustomer(var TransferHeader: Record "Transfer Header"; Customer: Record Customer)
+    begin
+        GlobalTransferHeader := TransferHeader;
+    end;
+
+    [EventSubscriber(ObjectType::Table, Database::"Transfer Header", 'OnValidateBilltoCustomerTemplCodeOnBeforeRecreateTransferLines', '', true, true)]
+    local procedure UpdateTransferLineFieldsCaptionOnValidateBilltoCustTemplCodeBeforeRecreateTransferLines(var TransferHeader: Record "Transfer Header"; CallingFieldNo: Integer)
+    begin
+        GlobalTransferHeader := TransferHeader;
+    end;
+    /////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    /////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    /////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    /////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    /////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    /////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    /////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
 }

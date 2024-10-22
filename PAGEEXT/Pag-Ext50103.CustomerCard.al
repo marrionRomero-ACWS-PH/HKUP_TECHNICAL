@@ -53,4 +53,33 @@ pageextension 50103 Customer extends "Customer Card"
             }
         }
     }
+    actions
+    {
+        addLast(processing)
+        {
+            action("Discount Title Setup")
+            {
+                ApplicationArea = all;
+                Caption = 'Discount Title Setup';
+                Image = Discount;
+                Promoted = true;
+                PromotedIsBig = true;
+                PromotedCategory = Process;
+                RunObject = Page "Discount Title Setup List";
+                RunPageLink = "Disc. Line No." = field("No.");
+            }
+
+            action("Customer Discount Setup")
+            {
+                ApplicationArea = all;
+                Caption = 'Customer Discount Setup';
+                Image = Discount;
+                Promoted = true;
+                PromotedIsBig = true;
+                PromotedCategory = Process;
+                RunObject = Page "Customer Discount Setup list";
+                RunPageLink = "Customer" = field("No.");
+            }
+        }
+    }
 }

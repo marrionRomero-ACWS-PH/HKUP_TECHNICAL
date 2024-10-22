@@ -1,4 +1,4 @@
-pageextension 50117 "Transfer Orders" extends "Transfer ORders"
+pageextension 50118 "Posted Transfer Receipt" extends "Posted Transfer Receipt"
 {
     layout
     {

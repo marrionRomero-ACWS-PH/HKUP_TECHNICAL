@@ -9,7 +9,7 @@ table 50108 "SAR Line"
         field(1; "SAR No."; Code[20])
         {
             Caption = 'SAR No.';
-            TableRelation = "SAR Header"."SAR No.";
+            TableRelation = "SAR Header";
         }
         field(2; "SAR Line No."; Integer)
         {
