@@ -2,37 +2,30 @@ pageextension 50114 "Transfer Order Subform" extends "Transfer Order Subform"
 {
     layout
     {
-        addlast(content)
+        addafter(Description)
         {
-            field("List Price"; Rec."List Price")
+            field("Pub Code"; Rec."Pub Code")
+            {
+                ApplicationArea = all;
+            }
+            field("Unit Price"; Rec."Unit Price")
             {
                 ApplicationArea = all;
                 BlankZero = true;
             }
-            field("Discount %"; Rec."Discount %")
+            field("Line Discount"; Rec."Line Discount %")
             {
                 ApplicationArea = all;
             }
-            field("Currency"; Rec."Currency")
-            {
-                ApplicationArea = all;
-                DrillDown = true;
-                DrillDownPageId = Currencies;
-            }
-            field("Currency Factor"; Rec."Currency Factor")
+
+            field("Line Amount"; Rec."Line Amount")
             {
                 ApplicationArea = all;
                 BlankZero = true;
             }
-            field("Amount"; Rec."Amount")
+            field("Your Reference"; Rec."Your Reference")
             {
                 ApplicationArea = all;
-                BlankZero = true;
-            }
-            field("Amount (LCY)"; Rec."Amount (LCY)")
-            {
-                ApplicationArea = all;
-                BlankZero = true;
             }
         }
     }

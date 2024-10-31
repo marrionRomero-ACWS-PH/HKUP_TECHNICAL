@@ -37,7 +37,6 @@ tableextension 50105 "SalesLine(Pub Code)" extends "Sales Line"
             // Get the related Sales Header
             if not SalesHeader.Get("Document Type", "Document No.") then
                 exit;
-
             // Check if No. Series is an Ebook Invoice series
             if NoSeries.Get(SalesHeader."No. Series") then begin
                 if NoSeries."Ebook" then begin

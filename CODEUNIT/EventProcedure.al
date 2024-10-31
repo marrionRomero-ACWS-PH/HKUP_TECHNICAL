@@ -84,5 +84,9 @@ codeunit 50100 "Event Procedure"
     local procedure OnAfterInitSeries(var NoSeries: Record "No. Series"; DefaultNoSeriesCode: Code[20]; NewDate: Date; var NewNo: Code[20])
     begin
     end;
+<<<<<<< Updated upstream
     ///////------CUSTOM "No.SERIESMGT"  END------\\\\\\\
+=======
+
+>>>>>>> Stashed changes
 }

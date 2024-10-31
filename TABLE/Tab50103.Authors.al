@@ -81,16 +81,16 @@ table 50103 Authors
     procedure AssistEdit(OldAuth: Record Authors): Boolean
     var
         SalesSetup: Record "Sales & Receivables Setup";
-        Auth: Record Authors;
+        l_recAuthor: Record Authors;
         NoSeries: Codeunit "No. Series";
 
     begin
-        Auth := Rec;
+        l_recAuthor := Rec;
         SalesSetup.Get();
         SalesSetup.TestField("Author No.'s");
-        if NoSeries.LookupRelatedNoSeries(SalesSetup."Author No.'s", OldAuth."No. Series", Auth."No. Series") then begin
-            Auth."Author No." := NoSeries.GetNextNo(Auth."No. Series");
-            Rec := Auth;
+        if NoSeries.LookupRelatedNoSeries(SalesSetup."Author No.'s", OldAuth."No. Series", l_recAuthor."No. Series") then begin
+            l_recAuthor."Author No." := NoSeries.GetNextNo(l_recAuthor."No. Series");
+            Rec := l_recAuthor;
             OnAssistEditOnBeforeExit(Rec);
             exit(true);
         end;
@@ -133,7 +133,7 @@ table 50103 Authors
     begin
     end;
 
-    local procedure OnAssistEditOnBeforeExit(var Auth: Record Authors)
+    local procedure OnAssistEditOnBeforeExit(var Author: Record Authors)
     begin
     end;
 

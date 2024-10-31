@@ -46,7 +46,6 @@ table 50105 "Item Commission"
                     "Commission Effective End Date" := 0D; // Reset to blank if validation fails
                 end;
             end;
-
         }
     }
     keys

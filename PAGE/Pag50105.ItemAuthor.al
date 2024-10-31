@@ -39,9 +39,11 @@ page 50105 "Item Author"
                 }
                 field("Author Name"; Rec."Author Name")
                 {
+                    ApplicationArea = all;
                 }
                 field("Royalty Fee %"; Rec."Royalty Fee %")
                 {
+                    ApplicationArea = all;
                 }
             }
         }

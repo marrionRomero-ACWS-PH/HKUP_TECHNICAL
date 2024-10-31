@@ -10,12 +10,12 @@ tableextension 50113 "Transfer Receipt Header" extends "Transfer Receipt Header"
 
             trigger OnValidate()
             var
-                CustRec: Record Customer;
+                Customer: Record Customer;
 
             begin
                 Reset();
-                if CustRec.Get("Customer Name") then begin
-                    "Customer Name" := CustRec.Name;
+                if Customer.Get("Customer Name") then begin
+                    "Customer Name" := Customer.Name;
                 end;
             end;
         }

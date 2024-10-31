@@ -10,12 +10,12 @@ tableextension 50114 "Transfer Shipment Header" extends "Transfer Shipment Heade
 
             trigger OnValidate()
             var
-                CustRec: Record Customer;
+                Customer: Record Customer;
 
             begin
                 Reset();
-                if CustRec.Get("Customer Name") then begin
-                    "Customer Name" := CustRec.Name;
+                if Customer.Get("Customer Name") then begin
+                    "Customer Name" := Customer.Name;
                 end;
             end;
         }

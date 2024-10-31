@@ -54,13 +54,6 @@ tableextension 50100 Item extends Item
             MaxValue = 9999;
             DataClassification = ToBeClassified;
         }
-        // field(50118; "Format"; Option)
-        // {
-        //     Caption = 'Format';
-        //     DataClassification = ToBeClassified;
-        //     OptionMembers = hb,pb,"eBook (ePub)","eBook (PDF)","hb (+media)","import hb","import pb","eBook (HKSO)","pb (+media)",other,"eBook (HTML)","reprint pb (new ISBN)",NA;
-        // }
-
         field(50118; "Format"; Code[50])
         {
             Caption = 'Format';

@@ -13,7 +13,6 @@ tableextension 50117 "Transfer Receipt Line" extends "Transfer Receipt Line"
             DataClassification = ToBeClassified;
             MinValue = 0;
             MaxValue = 100;
-
         }
         field(50102; Currency; Code[20])
         {

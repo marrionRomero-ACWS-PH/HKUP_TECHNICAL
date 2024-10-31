@@ -73,16 +73,16 @@ page 50104 "Author Card"
         }
     }
 
-    trigger OnOpenPage()
-    begin
-        if GuiAllowed() then
-            OnOpenPageFunc();
-    end;
+    // trigger OnOpenPage()
+    // begin
+    //     if GuiAllowed() then
+    //         OnOpenPageFunc();
+    // end;
 
-    local procedure OnOpenPageFunc()
-    begin
-        SetNoFieldVisible();
-    end;
+    // local procedure OnOpenPageFunc()
+    // begin
+    //     SetNoFieldVisible();
+    // end;
 
     var
         NoFieldVisible: Boolean;
