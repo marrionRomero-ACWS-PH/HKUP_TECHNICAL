@@ -14,35 +14,6 @@ tableextension 50115 "Transfer Line" extends "Transfer Line"
             MinValue = 0;
             MaxValue = 100;
         }
-<<<<<<< Updated upstream
-        field(50102; Currency; Code[20])
-        {
-            Caption = 'Currency';
-            DataClassification = ToBeClassified;
-            TableRelation = Currency;
-        }
-        field(50103; "Currency Factor"; Decimal)
-        {
-            Caption = 'Currency Factor';
-            DataClassification = ToBeClassified;
-        }
-        field(50104; Amount; Decimal)
-        {
-            Caption = 'Amount';
-            DataClassification = ToBeClassified;
-        }
-        field(50105; "Amount (LCY)"; Decimal)
-        {
-            Caption = 'Amount (LCY)';
-            DataClassification = ToBeClassified;
-        }
-        field(50106; "Your Reference"; Text[250])
-        {
-            Caption = 'Your Reference';
-            DataClassification = ToBeClassified;
-        }
-    }
-=======
         field(50102; "Document Type"; Enum "Sales Document Type")
         {
             Caption = 'Document Type';
@@ -82,5 +53,4 @@ tableextension 50115 "Transfer Line" extends "Transfer Line"
         g_NoSeries: Record "No. Series";
         g_recItem: Record Item;
 
->>>>>>> Stashed changes
 }

@@ -4,11 +4,11 @@ pageextension 50117 "Transfer Orders" extends "Transfer ORders"
     {
         addlast(content)
         {
-            field("Customer No."; Rec."Customer No.")
+            field("Customer No."; Rec."Sell-To Customer Name")
             {
 
             }
-            field("Customer Name"; Rec."Customer Name")
+            field("Customer Name"; Rec."Sell-To Customer Name")
             {
 
             }
