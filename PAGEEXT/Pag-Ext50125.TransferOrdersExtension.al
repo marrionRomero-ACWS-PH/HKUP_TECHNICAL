@@ -1,4 +1,4 @@
-pageextension 50125 "Transfer Orders Extension" extends "Transfer orders"
+pageextension 50126 "Transfer Orders Extension" extends "Transfer orders"
 {
     layout
     {
