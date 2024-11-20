@@ -39,18 +39,34 @@ tableextension 50115 "Transfer Line" extends "Transfer Line"
             TableRelation = Item."Pub Code";
             trigger OnValidate()
             var
-
+                recItem: Record Item;
             begin
-                if g_recItem.Get("Item No.") then begin
-                    // Convert the Pub Code option value to Text
-                    "Pub Code" := Format(g_recItem."Pub Code");
-                end;
+
+                if ("Direct Transfer" = true) then
+                    if "Pub Code" = '' then
+                        if recItem.Get("Item No.") then begin
+                            // Description := recItem.Description;
+                            "Pub Code" := Format(recItem."Pub Code");
+                            // Validate("Pub Code");
+                            Modify();
+                        end;
             end;
+
         }
     }
-    var
-        g_recTransferHeader: Record "Transfer Header";
-        g_NoSeries: Record "No. Series";
-        g_recItem: Record Item;
+
+    // trigger OnModify()
+    // var
+    //     recItem: Record Item;
+    // begin
+
+    //     "Pub Code" := '';
+    //     if recItem.Get("Item No.") then begin
+    //         // Description := recItem.Description;
+    //         "Pub Code" := Format(recItem."Pub Code");
+    //         // Validate("Pub Code");
+    //         Modify();
+    //     end;
+    // end;
 
 }

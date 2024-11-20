@@ -4,10 +4,9 @@ pageextension 50116 "Transfer Order" extends "Transfer Order"
     {
         addafter("No.")
         {
-            field("Customer No."; Rec."Customer No.")
+            field("Sell-to Customer No."; Rec."Sell-to Customer No.")
             {
                 ApplicationArea = All;
-
             }
             field("Sell-To Customer Name"; Rec."Sell-To Customer Name")
             {
@@ -67,7 +66,7 @@ pageextension 50116 "Transfer Order" extends "Transfer Order"
                 ShowCaption = false;
                 field("Ship-to"; ShipToOptions)
                 {
-                    ApplicationArea = basic, suite;
+                    ApplicationArea = All;
                     trigger OnValidate()
                     var
                         ShipToAddress: Record "Ship-to Address";
@@ -95,7 +94,7 @@ pageextension 50116 "Transfer Order" extends "Transfer Order"
                                     if ShipToAddressList.RunModal() = ACTION::LookupOK then begin
                                         ShipToAddressList.GetRecord(ShipToAddress);
                                         OnValidateShipToOptionsOnAfterShipToAddressListGetRecord(ShipToAddress, Rec);
-                                        Rec.Validate("Ship-to Code", ShipToAddress.Code);
+                                        // Rec.Validate("Ship-to Code", ShipToAddress.Code);
                                         IsShipToCountyVisible := FormatAddress.UseCounty(ShipToAddress."Country/Region Code");
                                     end else
                                         ShipToOptions := ShipToOptions::"Custom Address";
@@ -202,8 +201,8 @@ pageextension 50116 "Transfer Order" extends "Transfer Order"
                 ApplicationArea = All;
                 Caption = 'Contact';
             }
-        }
 
+        }
     }
 
     var
@@ -247,7 +246,7 @@ pageextension 50116 "Transfer Order" extends "Transfer Order"
     begin
     end;
 
-    local procedure OnValidateShipToOptionsOnAfterShipToAddressListGetRecord(var ShipToAddress: Record "Ship-to Address"; var TransferHeader: Record "Transfer Header")
+    local procedure OnValidateShipToOptionsOnAfterShipToAddressListGetRecord(var ShipToAddress: Record "Ship-to Address"; var SalesHeader: Record "Transfer Header")
     begin
     end;
 

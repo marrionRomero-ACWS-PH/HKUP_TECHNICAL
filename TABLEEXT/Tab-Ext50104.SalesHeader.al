@@ -34,6 +34,7 @@ tableextension 50104 "Sales Header" extends "Sales Header"
         {
             DataClassification = ToBeClassified;
         }
+
     }
 
     local procedure SetSalesLineValuesToZero()

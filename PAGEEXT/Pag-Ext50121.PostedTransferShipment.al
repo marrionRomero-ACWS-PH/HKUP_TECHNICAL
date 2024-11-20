@@ -2,13 +2,13 @@ pageextension 50121 "Posted Transfer Shipment" extends "Posted Transfer Shipment
 {
     layout
     {
-        addlast(content)
+        addafter("No.")
         {
-            field("Customer No."; Rec."Customer No.")
+            field("Sell-To Customer No."; Rec."Sell-To Customer No.")
             {
                 ApplicationArea = all;
             }
-            field("Customer Name"; Rec."Customer Name")
+            field("Sell-To Customer Name"; Rec."Sell-To Customer Name")
             {
                 ApplicationArea = all;
             }

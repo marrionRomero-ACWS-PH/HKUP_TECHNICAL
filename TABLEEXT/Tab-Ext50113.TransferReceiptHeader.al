@@ -2,27 +2,29 @@ tableextension 50113 "Transfer Receipt Header" extends "Transfer Receipt Header"
 {
     fields
     {
-        field(50100; "Customer No."; Code[20])
+        field(50100; "Sell-To Customer No."; Code[20])
         {
             Caption = 'Customer No.';
-            TableRelation = Customer;
+            // TableRelation = Customer;
+            Editable = false;
             DataClassification = ToBeClassified;
 
-            trigger OnValidate()
-            var
-                Customer: Record Customer;
+            // trigger OnValidate()
+            // var
+            //     Customer: Record Customer;
 
-            begin
-                Reset();
-                if Customer.Get("Customer Name") then begin
-                    "Customer Name" := Customer.Name;
-                end;
-            end;
+            // begin
+            //     Reset();
+            //     if Customer.Get("Customer Name") then begin
+            //         "Customer Name" := Customer.Name;
+            //     end;
+            // end;
         }
-        field(50101; "Customer Name"; Text[250])
+        field(50101; "Sell-To Customer Name"; Text[250])
         {
             Caption = 'Customer Name';
             DataClassification = ToBeClassified;
+            Editable = false;
         }
         field(50102; "Currency Code"; Code[20])
         {

@@ -16,13 +16,13 @@ tableextension 50105 "SalesLine(Pub Code)" extends "Sales Line"
 
     trigger OnModify()
     var
-        ItemRecord: Record Item;
+        recItem: Record Item;
         SalesHeader: Record "Sales Header";
         NoSeries: Record "No. Series";
     begin
         if ("Type" = "Type"::Item) then begin
-            if ItemRecord.Get("No.") then
-                "Pub Code" := Format(ItemRecord."Pub Code");
+            if recItem.Get("No.") then
+                "Pub Code" := Format(recItem."Pub Code");
         end;
 
         begin
@@ -40,23 +40,24 @@ tableextension 50105 "SalesLine(Pub Code)" extends "Sales Line"
             // Check if No. Series is an Ebook Invoice series
             if NoSeries.Get(SalesHeader."No. Series") then begin
                 if NoSeries."Ebook" then begin
-                    if ItemRecord.Get("No.") then begin
-                        if (ItemRecord."Type" <> ItemRecord."Type"::Service) and
-                           (ItemRecord."Type" <> ItemRecord."Type"::"Non-Inventory") and
-                           (ItemRecord."Type" = ItemRecord."Type"::Inventory) and
-                           (ItemRecord."Pub Code" <> ItemRecord."Pub Code"::"Q – Ebook") then
+                    if recItem.Get("No.") then begin
+                        if (recItem."Type" <> recItem."Type"::Service) and
+                           (recItem."Type" <> recItem."Type"::"Non-Inventory") and
+                           (recItem."Type" = recItem."Type"::Inventory) and
+                           (recItem."Pub Code" <> recItem."Pub Code"::"Q – Ebook") then
                             Error('This is an Ebook invoice, please select an Ebook item.');
                     end;
                 end
                 else begin
-                    if ItemRecord.Get("No.") then begin
-                        if (ItemRecord."Pub Code" = ItemRecord."Pub Code"::"Q – Ebook") then
+                    if recItem.Get("No.") then begin
+                        if (recItem."Pub Code" = recItem."Pub Code"::"Q – Ebook") then
                             Error('This is not an Ebook invoice, please select a non-Ebook item.');
                     end;
                 end;
             end;
         end;
     end;
+
 
     trigger OnDelete()
     begin

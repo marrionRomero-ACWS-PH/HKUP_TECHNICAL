@@ -2,7 +2,7 @@ pageextension 50122 "Posted Transfer Shpt. Subform" extends "Posted Transfer Shp
 {
     layout
     {
-        addlast(content)
+        addafter("Item No.")
         {
             field("List Price"; Rec."List Price")
             {

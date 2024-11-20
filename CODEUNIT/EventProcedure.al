@@ -1,5 +1,6 @@
 codeunit 50100 "Event Procedure"
 {
+    EventSubscriberInstance = StaticAutomatic;
     ///////------AUTHOR NO. VISIBILITTY START------\\\\\\\
     procedure AuthorNoIsVisible(): Boolean
     var
@@ -85,4 +86,13 @@ codeunit 50100 "Event Procedure"
     begin
     end;
     ///////------CUSTOM "No.SERIESMGT"  END------\\\\\\\
+
+    // [EventSubscriber(ObjectType::Table, Database::"Transfer Header", , '', true, true)]
+
+
+
+
+
+
+
 }

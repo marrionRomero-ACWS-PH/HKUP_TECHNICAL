@@ -3,15 +3,16 @@ tableextension 50112 "Transfer Header" extends "Transfer Header"
 {
     fields
     {
-        field(50000; "Sell-to Customer No."; Code[20])
+        field(50000; "Sell-to Customer No."; Text[80])
         {
             Caption = 'Customer No.';
             DataClassification = ToBeClassified;
             TableRelation = Customer."No.";
+
+
             trigger OnValidate()
             var
                 Customer: Record "Customer";
-
             begin
                 if Customer.Get("No.") then begin
                     "Sell-to Customer Name" := Customer."Name"
@@ -27,16 +28,24 @@ tableextension 50112 "Transfer Header" extends "Transfer Header"
         field(50002; "Sell-To Customer Name"; Text[20])
         {
             Caption = 'Customer Name';
-            TableRelation = Customer;
+            DataClassification = ToBeClassified;
+            TableRelation = Customer.Name;
+            ValidateTableRelation = false;
 
             trigger OnLookup()
             var
-                CustomerName: Text;
+                Customer: Record Customer;
             begin
-                CustomerName := "Sell-to Customer Name";
-                LookupSellToCustomerName(CustomerName);
-                "Sell-to Customer Name" := CopyStr(CustomerName, 1, MaxStrLen("Sell-to Customer Name"));
+                if "Sell-to Customer No." <> '' then
+                    Customer.Get("Sell-to Customer No.");
+
+                if Customer.SelectCustomer(Customer) then begin
+                    xRec := Rec;
+                    "Sell-to Customer Name" := Customer.Name;
+                    Validate("Sell-to Customer No.", Customer."No.");
+                end;
             end;
+
 
         }
         field(50003; "Currency Code"; Code[20])
@@ -393,39 +402,19 @@ tableextension 50112 "Transfer Header" extends "Transfer Header"
     procedure CopySellToAddressToShipToAddressInTransfer()
     var
         TransferHeader: Record "Transfer Header";
+        ShipOpt: Record "Ship-to Address";
+
     begin
-        TransferHeader.Get("No.");
-        "Ship-to Address" := "Sell-to Address";
-        "Ship-to Address 2" := "Sell-to Address 2";
-        "Ship-to City" := "Sell-to City";
-        "Ship-to Contact" := "Sell-to Contact";
-        "Ship-to Country/Region Code" := "Sell-to Country/Region Code";
-        "Ship-to County" := "Sell-to County";
-        "Ship-to Post Code" := "Sell-to Post Code";
-
-    end;
-
-    procedure LookupSellToCustomerName(var CustomerName: Text): Boolean
-    var
-        Customer: Record Customer;
-        LookupStateManager: Codeunit "Lookup State Manager";
-        RecVariant: Variant;
-        SearchCustomerName: Text;
-    begin
-        SearchCustomerName := CustomerName;
-        Customer.SetFilter("Date Filter", GetFilter("Date Filter"));
-        if "Sell-to Customer No." <> '' then
-            Customer.Get("Sell-to Customer No.");
-
-        if Customer.SelectCustomer(Customer) then begin
-            if Rec."Sell-to Customer Name" = Customer.Name then
-                CustomerName := SearchCustomerName
-            else
-                CustomerName := Customer.Name;
-            RecVariant := Customer;
-            LookupStateManager.SaveRecord(RecVariant);
-            exit(true);
-        end;
+        // TransferHeader.Init();
+        // TransferHeader.Get("No.");
+        "Ship-to Address" := SalesHeader."Ship-to Address";
+        "Ship-to Address 2" := SalesHeader."Ship-to Address 2";
+        "Ship-to City" := SalesHeader."Ship-to City";
+        "Ship-to Contact" := SalesHeader."Ship-to Contact";
+        "Ship-to Country/Region Code" := SalesHeader."Ship-to Country/Region Code";
+        "Ship-to County" := SalesHeader."Ship-to County";
+        "Ship-to Post Code" := SalesHeader."Ship-to Post Code";
+        TransferHeader.Insert();
     end;
 
     local procedure OnAfterValidateShippingOptions(var TransferHeader: Record "Transfer Header"; ShipToOptions: Option "Default (Sell-to Address)","Alternate Shipping Address","Custom Address")

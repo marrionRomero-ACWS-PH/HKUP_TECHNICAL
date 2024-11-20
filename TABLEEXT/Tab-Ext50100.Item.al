@@ -136,13 +136,13 @@ tableextension 50100 Item extends Item
         {
             Caption = 'Parent Item No.';
             DataClassification = ToBeClassified;
-            TableRelation = Item."No.";
+            TableRelation = Item;
         }
         field(50122; "No. of Authors"; Integer)
         {
             Caption = 'No. of Authors';
-            FieldClass = FlowField;
-            CalcFormula = Count("Item Author" where("Item No." = Field("No.")));
+            // FieldClass = FlowField;
+            // CalcFormula = Count("Item Author" where("Item No." = Field("No.")));
         }
         field(50123; "No. of SAR Documents"; Integer)
         {

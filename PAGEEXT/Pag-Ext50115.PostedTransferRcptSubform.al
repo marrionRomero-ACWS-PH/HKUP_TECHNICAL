@@ -2,7 +2,7 @@ pageextension 50115 "Posted Transfer Rcpt. Subform" extends "Posted Transfer Rcp
 {
     layout
     {
-        addlast(content)
+        addafter("Item No.")
         {
             field("List Price"; Rec."List Price")
             {
