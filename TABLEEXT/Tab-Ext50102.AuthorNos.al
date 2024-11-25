@@ -1,4 +1,4 @@
-tableextension 50102 "Author No.'s" extends "Sales & Receivables Setup"
+tableextension 50102 "Author No.'s" extends "Purchases & Payables Setup"
 {
     fields
     {

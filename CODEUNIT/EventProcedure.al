@@ -1,88 +1,60 @@
 codeunit 50100 "Event Procedure"
 {
-    ///////------AUTHOR NO. VISIBILITTY START------\\\\\\\
     procedure AuthorNoIsVisible(): Boolean
     var
-        NoSeriesCode: Code[20];
-        IsHandled: Boolean;
-        IsVisible: Boolean;
-        AuthNoVisible: Boolean;
-        IsAuthNoInitialized: boolean;
+        l_codNoSeriesCode: Code[20];
+        l_bolAuthNoVisible: Boolean;
     begin
-        IsHandled := false;
-        IsVisible := false;
-        OnBeforeAuthorNoIsVisible(IsVisible, IsHandled);
-        if IsHandled then
-            exit(IsVisible);
-
-        if IsAuthNoInitialized then
-            exit(AuthNoVisible);
-        IsAuthNoInitialized := true;
-
-        NoSeriesCode := DetermineAuthorSeriesNo();
-        AuthNoVisible := ForceShowNoSeriesForDocNo(NoSeriesCode);
-        exit(AuthNoVisible);
+        l_codNoSeriesCode := DetermineAuthorSeriesNo();
+        l_bolAuthNoVisible := ForceShowNoSeriesForDocNo(l_codNoSeriesCode);
+        exit(l_bolAuthNoVisible);
     end;
 
-    //     procedure DetermineAuthorSeriesNo(): Code[20]
-    //     var
-    //         SalesReceivablesSetup: Record "Sales & Receivables Setup";
-    //     begin
-    //         SalesReceivablesSetup.SetLoadFields("Author No.'s");
-    //         SalesReceivablesSetup.Get();
-    //         exit(SalesReceivablesSetup."Author No.'s");
-    //     end;
-
-    //     procedure ForceShowNoSeriesForDocNo(NoSeriesCode: Code[20]): Boolean
-    //     var
-    //         NoSeries: Record "No. Series";
-    //         NoSeriesRelationship: Record "No. Series Relationship";
-    //         NoSeriesBatch: Codeunit "No. Series - Batch";
-    //         SeriesDate: Date;
-    //     begin
-    //         if not NoSeries.Get(NoSeriesCode) then
-    //             exit(true);
-
-    //         SeriesDate := WorkDate();
-    //         NoSeriesRelationship.SetRange(Code, NoSeriesCode);
-    //         if not NoSeriesRelationship.IsEmpty() then
-    //             exit(true);
-
-    //         if NoSeries."Manual Nos." or (NoSeries."Default Nos." = false) then
-    //             exit(true);
-
-    //         exit(NoSeriesBatch.GetNextNo(NoSeriesCode, SeriesDate, true) = '');
-    //     end;
-
-    //     // local procedure OnBeforeAuthorNoIsVisible(var IsVisible: Boolean; var IsHandled: Boolean)
-    //     // begin
-    //     // end;
-    //     ///////------AUTHOR NO. VISIBILITTY END------\\\\\\\
-
-    //     ///////------CUSTOM "No.SERIESMGT"  START------\\\\\\\
-    //     /////////////////////////////BEFORE\\\\\\\\\\\\\\\\\\\\\\\\\\
-    //     // procedure RaiseObsoleteOnBeforeInitSeries(var DefaultNoSeriesCode: Code[20]; OldNoSeriesCode: Code[20]; NewDate: Date; var NewNo: Code[20]; var NewNoSeriesCode: Code[20]; var IsHandled: Boolean)
-    //     // var
-    //     //     GlobalNoSeries: Record "No. Series";
-    //     //     GlobalNoSeriesCode: Code[20];
-    //     // begin
-    //     //     OnBeforeInitSeries(DefaultNoSeriesCode, OldNoSeriesCode, NewDate, NewNo, NewNoSeriesCode, GlobalNoSeries, IsHandled, GlobalNoSeriesCode);
-    //     // end;
-
-    //     // local procedure OnBeforeInitSeries(var DefaultNoSeriesCode: Code[20]; OldNoSeriesCode: Code[20]; NewDate: Date; var NewNo: Code[20]; var NewNoSeriesCode: Code[20]; var NoSeries: Record "No. Series"; var IsHandled: Boolean; var NoSeriesCode: Code[20])
-    //     // begin
-    //     // end;
-    //     // /////////////////////////////AFTER\\\\\\\\\\\\\\\\\\\\\\\\\\/// 
-    //     // procedure RaiseObsoleteOnAfterInitSeries(NoSeriesCode: Code[20]; DefaultNoSeriesCode: Code[20]; NewDate: Date; var NewNo: Code[20])
-    //     // var
-    //     //     NoSeries: Record "No. Series";
-    //     // begin
-    //     //     if NoSeries.Get(NoSeriesCode) then;
-    //     //     OnAfterInitSeries(NoSeries, DefaultNoSeriesCode, NewDate, NewNo);
-    //     // end;
-
-    local procedure OnAfterInitSeries(var NoSeries: Record "No. Series"; DefaultNoSeriesCode: Code[20]; NewDate: Date; var NewNo: Code[20])
+    procedure DetermineAuthorSeriesNo(): Code[20]
+    var
+        l_recPurchaseSetup: Record "Purchases & Payables Setup";
     begin
+        l_recPurchaseSetup.SetLoadFields("Author No.'s");
+        l_recPurchaseSetup.Get();
+        exit(l_recPurchaseSetup."Author No.'s");
     end;
-    ///////------CUSTOM "No.SERIESMGT"  END------\\\\\\\
+
+    procedure ForceShowNoSeriesForDocNo(NoSeriesCode: Code[20]): Boolean
+    var
+        l_recNoSeries: Record "No. Series";
+        l_recNoSeriesRelationship: Record "No. Series Relationship";
+        l_cuNoSeriesBatch: Codeunit "No. Series - Batch";
+        l_dateSeriesDate: Date;
+    begin
+        if not l_recNoSeries.Get(NoSeriesCode) then
+            exit(true);
+
+        l_dateSeriesDate := WorkDate();
+        l_recNoSeriesRelationship.SetRange(Code, NoSeriesCode);
+        if not l_recNoSeriesRelationship.IsEmpty() then
+            exit(true);
+
+        if l_recNoSeries."Manual Nos." or (l_recNoSeries."Default Nos." = false) then
+            exit(true);
+
+        exit(l_cuNoSeriesBatch.GetNextNo(NoSeriesCode, l_dateSeriesDate, true) = '');
+    end;
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    procedure RelatedNoSeries(): Code[20]
+    var
+        l_recPurchaseSetup: Record "Purchases & Payables Setup";
+        l_recAuthor: Record Authors;
+        l_cuNoSeries: Codeunit "No. Series";
+    begin
+        l_recAuthor := g_recAuthor;
+        l_recPurchaseSetup.Get();
+        l_recPurchaseSetup.TestField("Author No.'s");
+        if l_cuNoSeries.LookupRelatedNoSeries(l_recPurchaseSetup."Author No.'s", l_recAuthor."No. Series", l_recAuthor."No. Series") then begin
+            l_recAuthor."Author No." := l_cuNoSeries.GetNextNo(l_recAuthor."No. Series");
+            g_recAuthor := l_recAuthor;
+        end;
+    end;
+
+    var
+        g_recAuthor: Record Authors;
 }
