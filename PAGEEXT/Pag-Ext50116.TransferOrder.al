@@ -1,16 +1,16 @@
-// pageextension 50116 "Transfer Order" extends "Transfer Order"
-// {
-//     layout
-//     {
-//         addafter("No.")
-//         {
-//             field("Sell-to Customer No."; Rec."Sell-to Customer No.")
-//             {
-//                 ApplicationArea = All;
-//             }
-//             field("Sell-To Customer Name"; Rec."Sell-To Customer Name")
-//             {
-//                 ApplicationArea = All;
+pageextension 50116 "Transfer Order" extends "Transfer Order"
+{
+    layout
+    {
+        addafter("No.")
+        {
+            field("Sell-to Customer No."; Rec."Sell-to Customer No.")
+            {
+                ApplicationArea = All;
+            }
+            field("Sell-To Customer Name"; Rec."Sell-To Customer Name")
+            {
+                ApplicationArea = All;
 
 //                 trigger OnValidate()
 //                 begin
@@ -20,91 +20,91 @@
 //             }
 //         }
 
-//         addlast(General)
-//         {
-//             field("Currency Code"; Rec."Currency Code")
-//             {
-//                 ApplicationArea = all;
+                //         addlast(General)
+                //         {
+                //             field("Currency Code"; Rec."Currency Code")
+                //             {
+                //                 ApplicationArea = all;
 
-//                 trigger OnAssistEdit()
-//                 begin
-//                     Clear(ChangeExchangeRate);
-//                     if Rec."Posting Date" <> 0D then
-//                         ChangeExchangeRate.SetParameter(Rec."Currency Code", Rec."Currency Factor", Rec."Posting Date")
-//                     else
-//                         ChangeExchangeRate.SetParameter(Rec."Currency Code", Rec."Currency Factor", WorkDate());
-//                     if ChangeExchangeRate.RunModal() = ACTION::OK then begin
-//                         Rec.Validate("Currency Factor", ChangeExchangeRate.GetParameter());
-//                         // SaveInvoiceDiscountAmount();
-//                     end;
-//                     Clear(ChangeExchangeRate);
-//                 end;
+                //                 trigger OnAssistEdit()
+                //                 begin
+                //                     Clear(ChangeExchangeRate);
+                //                     if Rec."Posting Date" <> 0D then
+                //                         ChangeExchangeRate.SetParameter(Rec."Currency Code", Rec."Currency Factor", Rec."Posting Date")
+                //                     else
+                //                         ChangeExchangeRate.SetParameter(Rec."Currency Code", Rec."Currency Factor", WorkDate());
+                //                     if ChangeExchangeRate.RunModal() = ACTION::OK then begin
+                //                         Rec.Validate("Currency Factor", ChangeExchangeRate.GetParameter());
+                //                         // SaveInvoiceDiscountAmount();
+                //                     end;
+                //                     Clear(ChangeExchangeRate);
+                //                 end;
 
-//                 trigger OnValidate()
-//                 begin
-//                     CurrPage.Update();
-//                 end;
-//             }
+                //                 trigger OnValidate()
+                //                 begin
+                //                     CurrPage.Update();
+                //                 end;
+                //             }
 
-//             field("Total Excl.VAT"; Rec."Total Excl.VAT")
-//             {
-//                 ApplicationArea = Basic, Suite;
-//                 AutoFormatExpression = Currency.Code;
-//                 AutoFormatType = 1;
-//                 CaptionClass = DocumentTotals.GetTotalInclVATCaption(Currency.Code);
-//                 Editable = false;
-//             }
-//             field("Payment Terms Code"; Rec."Payment Terms Code")
-//             {
-//                 ApplicationArea = All;
-//             }
-//         }
-//         addfirst(Shipment)
-//         {
-//             group(ShipToOptions)
-//             {
-//                 ShowCaption = false;
-//                 field("Ship-to"; ShipToOptions)
-//                 {
-//                     ApplicationArea = All;
-//                     trigger OnValidate()
-//                     var
-//                         ShipToAddress: Record "Ship-to Address";
-//                         ShipToAddressList: Page "Ship-to Address List";
-//                         IsHandled: Boolean;
-//                     begin
-//                         IsHandled := false;
-//                         OnBeforeValidateShipToOptions(Rec, ShipToOptions.AsInteger(), IsHandled);
-//                         if IsHandled then
-//                             exit;
+            field("Total Excl.VAT"; Rec."Total Excl.VAT")
+            {
+                ApplicationArea = Basic, Suite;
+                AutoFormatExpression = Currency.Code;
+                AutoFormatType = 1;
+                CaptionClass = DocumentTotals.GetTotalInclVATCaption(Currency.Code);
+                Editable = false;
+            }
+            field("Payment Terms Code"; Rec."Payment Terms Code")
+            {
+                ApplicationArea = All;
+            }
+        }
+        addfirst(Shipment)
+        {
+            group(ShipToOptions)
+            {
+                ShowCaption = false;
+                field("Ship-to"; ShipToOptions)
+                {
+                    ApplicationArea = All;
+                    trigger OnValidate()
+                    var
+                        ShipToAddress: Record "Ship-to Address";
+                        ShipToAddressList: Page "Ship-to Address List";
+                        IsHandled: Boolean;
+                    begin
+                        IsHandled := false;
+                        OnBeforeValidateShipToOptions(Rec, ShipToOptions.AsInteger(), IsHandled);
+                        if IsHandled then
+                            exit;
 
-//                         case ShipToOptions of
-//                             ShipToOptions::"Default (Sell-to Address)":
-//                                 begin
-//                                     Rec.Validate("Ship-to Code", '');
+                        //                         case ShipToOptions of
+                        //                             ShipToOptions::"Default (Sell-to Address)":
+                        //                                 begin
+                        //                                     Rec.Validate("Ship-to Code", '');
 
-//                                     Rec.CopySellToAddressToShipToAddressinTransfer();
-//                                 end;
-//                             ShipToOptions::"Alternate Shipping Address":
-//                                 begin
-//                                     ShipToAddress.SetRange("Customer No.", Rec."Sell-to Customer No.");
-//                                     ShipToAddressList.LookupMode := true;
-//                                     ShipToAddressList.SetTableView(ShipToAddress);
+                        //                                     Rec.CopySellToAddressToShipToAddressinTransfer();
+                        //                                 end;
+                        //                             ShipToOptions::"Alternate Shipping Address":
+                        //                                 begin
+                        //                                     ShipToAddress.SetRange("Customer No.", Rec."Sell-to Customer No.");
+                        //                                     ShipToAddressList.LookupMode := true;
+                        //                                     ShipToAddressList.SetTableView(ShipToAddress);
 
-//                                     if ShipToAddressList.RunModal() = ACTION::LookupOK then begin
-//                                         ShipToAddressList.GetRecord(ShipToAddress);
-//                                         OnValidateShipToOptionsOnAfterShipToAddressListGetRecord(ShipToAddress, Rec);
-//                                         // Rec.Validate("Ship-to Code", ShipToAddress.Code);
-//                                         IsShipToCountyVisible := FormatAddress.UseCounty(ShipToAddress."Country/Region Code");
-//                                     end else
-//                                         ShipToOptions := ShipToOptions::"Custom Address";
-//                                 end;
-//                             ShipToOptions::"Custom Address":
-//                                 begin
-//                                     Rec.Validate("Ship-to Code", '');
-//                                     IsShipToCountyVisible := FormatAddress.UseCounty(Rec."Ship-to Country/Region Code");
-//                                 end;
-//                         end;
+                        if ShipToAddressList.RunModal() = ACTION::LookupOK then begin
+                            ShipToAddressList.GetRecord(ShipToAddress);
+                            OnValidateShipToOptionsOnAfterShipToAddressListGetRecord(ShipToAddress, Rec);
+                            // Rec.Validate("Ship-to Code", ShipToAddress.Code);
+                            IsShipToCountyVisible := FormatAddress.UseCounty(ShipToAddress."Country/Region Code");
+                        end else
+                            ShipToOptions := ShipToOptions::"Custom Address";
+                    end;
+                            ShipToOptions::"Custom Address":
+                                begin
+                                    Rec.Validate("Ship-to Code", '');
+                                    IsShipToCountyVisible := FormatAddress.UseCounty(Rec."Ship-to Country/Region Code");
+                                end;
+                        end;
 
 //                         OnAfterValidateShippingOptions(Rec, ShipToOptions.AsInteger());
 //                     end;
@@ -190,20 +190,20 @@
 //                     Importance = Additional;
 //                     QuickEntry = false;
 
-//                     trigger OnValidate()
-//                     begin
-//                         IsShipToCountyVisible := FormatAddress.UseCounty(Rec."Ship-to Country/Region Code");
-//                     end;
-//                 }
-//             }
-//             field("Ship-to Contact"; Rec."Ship-to Contact")
-//             {
-//                 ApplicationArea = All;
-//                 Caption = 'Contact';
-//             }
+                    trigger OnValidate()
+                    begin
+                        IsShipToCountyVisible := FormatAddress.UseCounty(Rec."Ship-to Country/Region Code");
+                    end;
+                }
+            }
+            field("Ship-to Contact"; Rec."Ship-to Contact")
+            {
+                ApplicationArea = All;
+                Caption = 'Contact';
+            }
 
-//         }
-//     }
+        }
+    }
 
 //     var
 //         IsSalesLinesEditable: Boolean;
@@ -246,8 +246,8 @@
 //     begin
 //     end;
 
-//     local procedure OnValidateShipToOptionsOnAfterShipToAddressListGetRecord(var ShipToAddress: Record "Ship-to Address"; var SalesHeader: Record "Transfer Header")
-//     begin
-//     end;
+    local procedure OnValidateShipToOptionsOnAfterShipToAddressListGetRecord(var ShipToAddress: Record "Ship-to Address"; var SalesHeader: Record "Transfer Header")
+    begin
+    end;
 
-// }
+}

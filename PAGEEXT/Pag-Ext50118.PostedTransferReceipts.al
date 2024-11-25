@@ -2,13 +2,13 @@ pageextension 50118 "Posted Transfer Receipts" extends "Posted Transfer Receipts
 {
     layout
     {
-        addafter("No.")
+        addlast(content)
         {
-            field("Customer No."; Rec."Sell-To Customer No.")
+            field("Customer No."; Rec."Customer No.")
             {
                 applicationArea = all;
             }
-            field("Customer Name"; Rec."Sell-To Customer Name")
+            field("Customer Name"; Rec."Customer Name")
             {
                 applicationArea = all;
             }
