@@ -3,8 +3,13 @@ page 50109 "SAR Card"
     ApplicationArea = All;
     Caption = 'SAR Card';
     PageType = Card;
+<<<<<<< HEAD
     SourceTable = "SAR Header";
 
+=======
+    SourceTable = "SAR Line";
+    AutoSplitKey = true;
+>>>>>>> parent of 372841d (Oct 9, 2024)
 
     layout
     {
@@ -17,31 +22,53 @@ page 50109 "SAR Card"
                 field("SAR No."; Rec."SAR No.")
                 {
                     ShowMandatory = true;
+<<<<<<< HEAD
                     DrillDown = true;
                     DrillDownPageId = "SAR List";
+=======
+                }
+                field("SAR Line No."; Rec."SAR Line No.")
+                {
+
+>>>>>>> parent of 372841d (Oct 9, 2024)
                 }
                 field("Item No."; Rec."Item No.")
                 {
-                    ShowMandatory = true;
+
                 }
-                field("Date"; Rec."Date")
+                field(Cover; Rec.Cover)
                 {
-                    ShowMandatory = true;
                 }
                 field(Quantity; Rec.Quantity)
                 {
+                    BlankZero = true;
                 }
-                field("Unit Cost"; Rec."Unit Cost")
+                field(Currency; Rec.Currency)
                 {
+                    TableRelation = Currency;
                 }
-                field("Average Cost"; Rec."Average Cost")
+                field("Currency Factor"; Rec."Currency Factor")
                 {
+
                 }
+                field(Amount; Rec.Amount)
+                {
+                    BlankZero = true;
+
+                }
+                field("Amount (LCY)"; Rec."Amount (LCY)")
+                {
+                    BlankZero = true;
+
+                }
+<<<<<<< HEAD
             }
             part("SAR Lines"; "SAR Line")
             {
                 ApplicationArea = all;
                 SubPageLink = "SAR No." = FIELD("SAR No.");
+=======
+>>>>>>> parent of 372841d (Oct 9, 2024)
             }
         }
     }

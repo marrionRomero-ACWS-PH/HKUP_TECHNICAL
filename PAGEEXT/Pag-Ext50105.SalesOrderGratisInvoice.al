@@ -1,4 +1,4 @@
-pageextension 50104 "Sales Order" extends "Sales Order"
+pageextension 50105 "SalesOrder-GratisInvoice" extends "Sales Order"
 {
     layout
     {

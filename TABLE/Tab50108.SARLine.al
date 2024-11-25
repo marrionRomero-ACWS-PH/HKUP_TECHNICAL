@@ -3,13 +3,16 @@ table 50108 "SAR Line"
     Caption = 'SAR Line';
     DataClassification = ToBeClassified;
 
-
     fields
     {
         field(1; "SAR No."; Code[20])
         {
             Caption = 'SAR No.';
+<<<<<<< HEAD
             TableRelation = "SAR Header"."SAR No.";
+=======
+            TableRelation = "SAR Header";
+>>>>>>> parent of 372841d (Oct 9, 2024)
         }
         field(2; "SAR Line No."; Integer)
         {
@@ -19,8 +22,11 @@ table 50108 "SAR Line"
         field(3; "Item No."; Code[20])
         {
             Caption = 'Item No.';
+<<<<<<< HEAD
             Editable = false;
             TableRelation = Item;
+=======
+>>>>>>> parent of 372841d (Oct 9, 2024)
         }
         field(4; Cover; Option)
         {
