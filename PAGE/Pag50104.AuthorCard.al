@@ -16,13 +16,24 @@ page 50104 "Author Card"
                 field("Author No."; Rec."Author No.")
                 {
                     ApplicationArea = All;
-                    Visible = NoFieldVisible;
+                    Visible = g_NoFieldVisible;
                     ShowMandatory = true;
 
                     trigger OnAssistEdit()
+                    var
+                        l_recSalesSetup: Record "Sales & Receivables Setup";
+                        l_recAuthor: Record Authors;
+                        NoSeries: Codeunit "No. Series";
+
                     begin
-                        if Rec.AssistEdit(xRec) then
+                        l_recAuthor := Rec;
+                        l_recSalesSetup.Get();
+                        l_recSalesSetup.TestField("Author No.'s");
+                        if NoSeries.LookupRelatedNoSeries(l_recSalesSetup."Author No.'s", l_recAuthor."No. Series", l_recAuthor."No. Series") then begin
+                            l_recAuthor."Author No." := NoSeries.GetNextNo(l_recAuthor."No. Series");
+                            Rec := l_recAuthor;
                             CurrPage.Update();
+                        end;
                     end;
                 }
                 field("Author Name"; Rec."Author Name")
@@ -38,16 +49,14 @@ page 50104 "Author Card"
                 }
                 field("Recipient No."; Rec."Recipient No.")
                 {
-                    ApplicationArea = All;
-                    Importance = Additional;
+                    ApplicationArea = all;
                     TableRelation = Vendor."No." WHERE("Recipient" = FILTER(true));
                     trigger OnValidate()
                     var
-                        VendorRec: Record Vendor;
+                        l_recVendor: Record Vendor;
                     begin
-                        // When Recipient No. is selected, auto-fill Recipient Name
-                        if VendorRec.Get(Rec."Recipient No.") then begin
-                            Rec."Recipient Name" := VendorRec.Name;
+                        if l_recVendor.Get(Rec."Recipient No.") then begin
+                            Rec."Recipient Name" := l_recVendor.Name;
                         end;
                     end;
                 }
@@ -60,7 +69,7 @@ page 50104 "Author Card"
                 }
             }
 
-            group(AddressDetails)
+            group("Address&Contact")
             {
                 Caption = 'Address & Contact';
                 field(Address; Rec.Address)
@@ -73,25 +82,15 @@ page 50104 "Author Card"
         }
     }
 
-    // trigger OnOpenPage()
-    // begin
-    //     if GuiAllowed() then
-    //         OnOpenPageFunc();
-    // end;
-
-    // local procedure OnOpenPageFunc()
-    // begin
-    //     SetNoFieldVisible();
-    // end;
-
+    trigger OnOpenPage()
     var
-        NoFieldVisible: Boolean;
-
-    local procedure SetNoFieldVisible()
-    var
-        DocumentNoVisibility: Codeunit "Event Procedure";
+        l_recDocNoVisibility: Codeunit "Event Procedure";
     begin
-        NoFieldVisible := DocumentNoVisibility.AuthorNoIsVisible();
+        if GuiAllowed() then
+            g_NoFieldVisible := l_recDocNoVisibility.AuthorNoIsVisible();
     end;
+
+    var
+        g_NoFieldVisible: Boolean;
 
 }

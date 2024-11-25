@@ -15,11 +15,11 @@ page 50106 "Item Commission"
             {
                 field("Item No."; Rec."Item No.")
                 {
-                    Visible = true;
+                    Visible = false;
                 }
                 field("Line No."; Rec."Line No.")
                 {
-                    Visible = true;
+                    Visible = false;
                 }
                 field("Commission Method"; Rec."Commission Method")
                 {
@@ -29,6 +29,7 @@ page 50106 "Item Commission"
                 }
                 field("Commission Effective Start Date"; Rec."Commission Start Date")
                 {
+                    NotBlank = true;
                 }
                 field("Commission Effective End Date"; Rec."Commission Effective End Date")
                 {

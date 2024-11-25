@@ -109,6 +109,7 @@ pageextension 50100 Item extends "Item Card"
                 ApplicationArea = All;
                 Editable = false;
             }
+
         }
 
     }

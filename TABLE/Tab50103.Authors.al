@@ -14,13 +14,13 @@ table 50103 Authors
             DataClassification = ToBeClassified;
             trigger OnValidate()
             var
-                SalesSetup: Record "Sales & Receivables Setup";
-                NoSeries: Codeunit "No. Series";
+                l_recSalesSetup: Record "Sales & Receivables Setup";
+                l_recNoSeries: Codeunit "No. Series";
 
             begin
                 if "Author No." <> xRec."Author No." then begin
-                    SalesSetup.Get();
-                    NoSeries.TestManual(SalesSetup."Author No.'s");
+                    l_recSalesSetup.Get();
+                    l_recNoSeries.TestManual(l_recSalesSetup."Author No.'s");
                     "No. Series" := '';
                 end;
             end;
@@ -34,7 +34,6 @@ table 50103 Authors
         {
             Caption = 'Recipient No.';
             DataClassification = ToBeClassified;
-            // TableRelation = Vendor."No." WHERE("Recipient" = FILTER(true));
             TableRelation = Vendor where(Recipient = const(true));
         }
         field(4; Address; Text[100])
@@ -71,74 +70,30 @@ table 50103 Authors
         }
     }
 
-    // Define a FieldGroup for the lookup
     fieldgroups
     {
-        fieldgroup(DropDown; "Author No.", "Author Name") // Display both fields in the lookup
+        fieldgroup(DropDown; "Author No.", "Author Name")
         {
         }
     }
-    procedure AssistEdit(OldAuth: Record Authors): Boolean
-    var
-        SalesSetup: Record "Sales & Receivables Setup";
-        l_recAuthor: Record Authors;
-        NoSeries: Codeunit "No. Series";
-
-    begin
-        l_recAuthor := Rec;
-        SalesSetup.Get();
-        SalesSetup.TestField("Author No.'s");
-        if NoSeries.LookupRelatedNoSeries(SalesSetup."Author No.'s", OldAuth."No. Series", l_recAuthor."No. Series") then begin
-            l_recAuthor."Author No." := NoSeries.GetNextNo(l_recAuthor."No. Series");
-            Rec := l_recAuthor;
-            OnAssistEditOnBeforeExit(Rec);
-            exit(true);
-        end;
-    end;
 
     trigger OnInsert()
     var
-        SalesSetup: Record "Sales & Receivables Setup";
-        Author: Record Authors;
-        NoSeries: Codeunit "No. Series";
-        NoSeriesMgt: Codeunit "Event Procedure";
-        IsHandled: Boolean;
+        l_recSalesSetup: Record "Sales & Receivables Setup";
+        l_recAuthor: Record Authors;
+        l_recNoSeries: Codeunit "No. Series";
+        l_recNoSeriesMgt: Codeunit "Event Procedure";
     begin
-        IsHandled := false;
-        OnBeforeOnInsert(Rec, IsHandled);
-        if IsHandled then
-            exit;
 
         if "Author No." = '' then begin
-            SalesSetup.Get();
-            SalesSetup.TestField("Author No.'s");
-            NoSeriesMgt.RaiseObsoleteOnBeforeInitSeries(SalesSetup."Author No.'s", xRec."No. Series", 0D, "Author No.", "No. Series", IsHandled);
-
-            if not IsHandled then begin
-                "No. Series" := SalesSetup."Author No.'s";
-                if NoSeries.AreRelated("No. Series", xRec."No. Series") then
-                    "No. Series" := xRec."No. Series";
-                "Author No." := NoSeries.GetNextNo("No. Series");
-                Author.ReadIsolation(IsolationLevel::ReadUncommitted);
-                Author.SetLoadFields("Author No.");
-                while Author.Get("Author No.") do
-                    "Author No." := NoSeries.GetNextNo("No. Series");
-
-                NoSeriesMgt.RaiseObsoleteOnAfterInitSeries("No. Series", SalesSetup."Author No.'s", 0D, "Author No.");
-            end;
+            l_recSalesSetup.Get();
+            l_recSalesSetup.TestField("Author No.'s");
+            "No. Series" := l_recSalesSetup."Author No.'s";
+            if l_recNoSeries.AreRelated(l_recSalesSetup."Author No.'s", xRec."No. Series") then
+                "No. Series" := xRec."No. Series";
+            "Author No." := l_recNoSeries.GetNextNo("No. Series");
         end;
     end;
-
-    local procedure OnBeforeOnInsert(var Author: Record Authors; var IsHandled: Boolean)
-    begin
-    end;
-
-    local procedure OnAssistEditOnBeforeExit(var Author: Record Authors)
-    begin
-    end;
-
-
-
 }
 
 
