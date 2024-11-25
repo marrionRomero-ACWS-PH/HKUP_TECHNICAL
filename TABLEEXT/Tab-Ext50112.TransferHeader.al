@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // tableextension 50112 "Transfer Header" extends "Transfer Header"
 // {
 //     fields
@@ -16,6 +17,26 @@
 //                 if Customer.Get("No.") then begin
 //                     "Sell-to Customer Name" := Customer."Name"
 //                 end;
+=======
+
+tableextension 50112 "Transfer Header" extends "Transfer Header"
+{
+    fields
+    {
+        field(50000; "Sell-to Customer No."; Code[20])
+        {
+            Caption = 'Customer No.';
+            DataClassification = ToBeClassified;
+            TableRelation = Customer."No.";
+            trigger OnValidate()
+            var
+                Customer: Record "Customer";
+
+            begin
+                if Customer.Get("No.") then begin
+                    "Sell-to Customer Name" := Customer."Name"
+                end;
+>>>>>>> parent of 06dbf32 (Marrion Update)
 
 //             end;
 //         }
@@ -24,6 +45,7 @@
 //             Caption = 'Document Type';
 //         }
 
+<<<<<<< HEAD
 //         field(50002; "Sell-To Customer Name"; Text[20])
 //         {
 //             Caption = 'Customer Name';
@@ -51,6 +73,27 @@
 //         {
 //             Caption = 'Currency Code';
 //             TableRelation = Currency;
+=======
+        field(50002; "Sell-To Customer Name"; Text[20])
+        {
+            Caption = 'Customer Name';
+            TableRelation = Customer;
+
+            trigger OnLookup()
+            var
+                CustomerName: Text;
+            begin
+                CustomerName := "Sell-to Customer Name";
+                LookupSellToCustomerName(CustomerName);
+                "Sell-to Customer Name" := CopyStr(CustomerName, 1, MaxStrLen("Sell-to Customer Name"));
+            end;
+
+        }
+        field(50003; "Currency Code"; Code[20])
+        {
+            Caption = 'Currency Code';
+            TableRelation = Currency;
+>>>>>>> parent of 06dbf32 (Marrion Update)
 
 //         }
 
@@ -398,6 +441,7 @@
 //         ShipToOptions: Enum "Sales Ship-to Options";
 //         PostCode: Record "Post Code";
 
+<<<<<<< HEAD
 //     procedure CopySellToAddressToShipToAddressInTransfer()
 //     var
 //         TransferHeader: Record "Transfer Header";
@@ -415,6 +459,45 @@
 //         "Ship-to Post Code" := SalesHeader."Ship-to Post Code";
 //         TransferHeader.Insert();
 //     end;
+=======
+    procedure CopySellToAddressToShipToAddressInTransfer()
+    var
+        TransferHeader: Record "Transfer Header";
+    begin
+        TransferHeader.Get("No.");
+        "Ship-to Address" := "Sell-to Address";
+        "Ship-to Address 2" := "Sell-to Address 2";
+        "Ship-to City" := "Sell-to City";
+        "Ship-to Contact" := "Sell-to Contact";
+        "Ship-to Country/Region Code" := "Sell-to Country/Region Code";
+        "Ship-to County" := "Sell-to County";
+        "Ship-to Post Code" := "Sell-to Post Code";
+
+    end;
+
+    procedure LookupSellToCustomerName(var CustomerName: Text): Boolean
+    var
+        Customer: Record Customer;
+        LookupStateManager: Codeunit "Lookup State Manager";
+        RecVariant: Variant;
+        SearchCustomerName: Text;
+    begin
+        SearchCustomerName := CustomerName;
+        Customer.SetFilter("Date Filter", GetFilter("Date Filter"));
+        if "Sell-to Customer No." <> '' then
+            Customer.Get("Sell-to Customer No.");
+
+        if Customer.SelectCustomer(Customer) then begin
+            if Rec."Sell-to Customer Name" = Customer.Name then
+                CustomerName := SearchCustomerName
+            else
+                CustomerName := Customer.Name;
+            RecVariant := Customer;
+            LookupStateManager.SaveRecord(RecVariant);
+            exit(true);
+        end;
+    end;
+>>>>>>> parent of 06dbf32 (Marrion Update)
 
 //     local procedure OnAfterValidateShippingOptions(var TransferHeader: Record "Transfer Header"; ShipToOptions: Option "Default (Sell-to Address)","Alternate Shipping Address","Custom Address")
 //     begin

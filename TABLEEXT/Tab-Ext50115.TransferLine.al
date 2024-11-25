@@ -38,7 +38,35 @@ tableextension 50115 "Transfer Line" extends "Transfer Line"
         field(50106; "Your Reference"; Text[250])
         {
             Caption = 'Your Reference';
+<<<<<<< HEAD
             DataClassification = ToBeClassified;
         }
     }
 }
+=======
+        }
+
+        field(50106; "Pub Code"; Code[20])
+        {
+            Caption = 'Pub Code';
+            Editable = false;
+
+            TableRelation = Item."Pub Code";
+            trigger OnValidate()
+            var
+
+            begin
+                if g_recItem.Get("Item No.") then begin
+                    // Convert the Pub Code option value to Text
+                    "Pub Code" := Format(g_recItem."Pub Code");
+                end;
+            end;
+        }
+    }
+    var
+        g_recTransferHeader: Record "Transfer Header";
+        g_NoSeries: Record "No. Series";
+        g_recItem: Record Item;
+
+}
+>>>>>>> parent of 06dbf32 (Marrion Update)

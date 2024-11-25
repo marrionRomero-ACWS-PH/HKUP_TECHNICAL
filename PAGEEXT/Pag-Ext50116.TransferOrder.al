@@ -4,9 +4,10 @@ pageextension 50116 "Transfer Order" extends "Transfer Order"
     {
         addafter("No.")
         {
-            field("Sell-to Customer No."; Rec."Sell-to Customer No.")
+            field("Customer No."; Rec."Customer No.")
             {
                 ApplicationArea = All;
+
             }
             field("Sell-To Customer Name"; Rec."Sell-To Customer Name")
             {
@@ -66,7 +67,7 @@ pageextension 50116 "Transfer Order" extends "Transfer Order"
                 ShowCaption = false;
                 field("Ship-to"; ShipToOptions)
                 {
-                    ApplicationArea = All;
+                    ApplicationArea = basic, suite;
                     trigger OnValidate()
                     var
                         ShipToAddress: Record "Ship-to Address";
@@ -91,6 +92,7 @@ pageextension 50116 "Transfer Order" extends "Transfer Order"
                         //                                     ShipToAddressList.LookupMode := true;
                         //                                     ShipToAddressList.SetTableView(ShipToAddress);
 
+<<<<<<< HEAD
                         if ShipToAddressList.RunModal() = ACTION::LookupOK then begin
                             ShipToAddressList.GetRecord(ShipToAddress);
                             OnValidateShipToOptionsOnAfterShipToAddressListGetRecord(ShipToAddress, Rec);
@@ -99,6 +101,16 @@ pageextension 50116 "Transfer Order" extends "Transfer Order"
                         end else
                             ShipToOptions := ShipToOptions::"Custom Address";
                     end;
+=======
+                                    if ShipToAddressList.RunModal() = ACTION::LookupOK then begin
+                                        ShipToAddressList.GetRecord(ShipToAddress);
+                                        OnValidateShipToOptionsOnAfterShipToAddressListGetRecord(ShipToAddress, Rec);
+                                        Rec.Validate("Ship-to Code", ShipToAddress.Code);
+                                        IsShipToCountyVisible := FormatAddress.UseCounty(ShipToAddress."Country/Region Code");
+                                    end else
+                                        ShipToOptions := ShipToOptions::"Custom Address";
+                                end;
+>>>>>>> parent of 06dbf32 (Marrion Update)
                             ShipToOptions::"Custom Address":
                                 begin
                                     Rec.Validate("Ship-to Code", '');
@@ -201,8 +213,8 @@ pageextension 50116 "Transfer Order" extends "Transfer Order"
                 ApplicationArea = All;
                 Caption = 'Contact';
             }
-
         }
+
     }
 
 //     var
@@ -246,7 +258,7 @@ pageextension 50116 "Transfer Order" extends "Transfer Order"
 //     begin
 //     end;
 
-    local procedure OnValidateShipToOptionsOnAfterShipToAddressListGetRecord(var ShipToAddress: Record "Ship-to Address"; var SalesHeader: Record "Transfer Header")
+    local procedure OnValidateShipToOptionsOnAfterShipToAddressListGetRecord(var ShipToAddress: Record "Ship-to Address"; var TransferHeader: Record "Transfer Header")
     begin
     end;
 
