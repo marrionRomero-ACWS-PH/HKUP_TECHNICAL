@@ -1,4 +1,4 @@
-pageextension 50110 "Related Items" extends "Item Card"
+pageextension 50111 "Related Items" extends "Item Card"
 {
     actions
     {

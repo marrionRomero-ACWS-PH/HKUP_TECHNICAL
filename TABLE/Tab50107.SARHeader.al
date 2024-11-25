@@ -8,7 +8,6 @@ table 50107 "SAR Header"
         field(1; "SAR No."; Code[20])
         {
             Caption = 'SAR No.';
-<<<<<<< HEAD
             trigger OnValidate()
             var
                 SARSetup: Record "Inventory Setup";
@@ -23,8 +22,6 @@ table 50107 "SAR Header"
                         "No. Series" := '';
                     end;
             end;
-=======
->>>>>>> parent of 372841d (Oct 9, 2024)
         }
         field(2; "Item No."; Code[20])
         {
@@ -47,6 +44,10 @@ table 50107 "SAR Header"
         {
             Caption = 'Average Cost';
         }
+        field(7; "No. Series"; code[20])
+        {
+
+        }
     }
     keys
     {
@@ -55,7 +56,6 @@ table 50107 "SAR Header"
             Clustered = true;
         }
     }
-<<<<<<< HEAD
     fieldgroups
     {
         fieldgroup(DropDown; "SAR No.", "Item No.", Date)
@@ -97,6 +97,4 @@ table 50107 "SAR Header"
     end;
 
 
-=======
->>>>>>> parent of 372841d (Oct 9, 2024)
 }

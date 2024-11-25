@@ -111,7 +111,6 @@ pageextension 50100 Item extends "Item Card"
             }
 
         }
-<<<<<<< HEAD:PAGEEXT/Pag-Ext50100.ItemCard.al
 
     }
     actions
@@ -181,7 +180,5 @@ pageextension 50100 Item extends "Item Card"
                 RunPageLink = "SAR No." = field("No.");
             }
         }
-=======
->>>>>>> parent of 372841d (Oct 9, 2024):PAGEEXT/Pag-Ext50100.Item.al
     }
 }

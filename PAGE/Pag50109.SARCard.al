@@ -3,13 +3,8 @@ page 50109 "SAR Card"
     ApplicationArea = All;
     Caption = 'SAR Card';
     PageType = Card;
-<<<<<<< HEAD
     SourceTable = "SAR Header";
 
-=======
-    SourceTable = "SAR Line";
-    AutoSplitKey = true;
->>>>>>> parent of 372841d (Oct 9, 2024)
 
     layout
     {
@@ -22,15 +17,8 @@ page 50109 "SAR Card"
                 field("SAR No."; Rec."SAR No.")
                 {
                     ShowMandatory = true;
-<<<<<<< HEAD
                     DrillDown = true;
                     DrillDownPageId = "SAR List";
-=======
-                }
-                field("SAR Line No."; Rec."SAR Line No.")
-                {
-
->>>>>>> parent of 372841d (Oct 9, 2024)
                 }
                 field("Item No."; Rec."Item No.")
                 {
@@ -61,14 +49,11 @@ page 50109 "SAR Card"
                     BlankZero = true;
 
                 }
-<<<<<<< HEAD
             }
             part("SAR Lines"; "SAR Line")
             {
                 ApplicationArea = all;
                 SubPageLink = "SAR No." = FIELD("SAR No.");
-=======
->>>>>>> parent of 372841d (Oct 9, 2024)
             }
         }
     }
