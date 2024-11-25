@@ -5,27 +5,14 @@ codeunit 50100 "Event Procedure"
     procedure AuthorNoIsVisible(): Boolean
     var
         NoSeriesCode: Code[20];
-        IsHandled: Boolean;
-        IsVisible: Boolean;
         AuthNoVisible: Boolean;
-        IsAuthNoInitialized: boolean;
     begin
-        IsHandled := false;
-        IsVisible := false;
-        OnBeforeAuthorNoIsVisible(IsVisible, IsHandled);
-        if IsHandled then
-            exit(IsVisible);
-
-        if IsAuthNoInitialized then
-            exit(AuthNoVisible);
-        IsAuthNoInitialized := true;
-
         NoSeriesCode := DetermineAuthorSeriesNo();
         AuthNoVisible := ForceShowNoSeriesForDocNo(NoSeriesCode);
         exit(AuthNoVisible);
     end;
 
-    local procedure DetermineAuthorSeriesNo(): Code[20]
+    procedure DetermineAuthorSeriesNo(): Code[20]
     var
         SalesReceivablesSetup: Record "Sales & Receivables Setup";
     begin
@@ -55,36 +42,36 @@ codeunit 50100 "Event Procedure"
         exit(NoSeriesBatch.GetNextNo(NoSeriesCode, SeriesDate, true) = '');
     end;
 
-    local procedure OnBeforeAuthorNoIsVisible(var IsVisible: Boolean; var IsHandled: Boolean)
-    begin
-    end;
+    // local procedure OnBeforeAuthorNoIsVisible(var IsVisible: Boolean; var IsHandled: Boolean)
+    // begin
+    // end;
     ///////------AUTHOR NO. VISIBILITTY END------\\\\\\\
 
     ///////------CUSTOM "No.SERIESMGT"  START------\\\\\\\
     /////////////////////////////BEFORE\\\\\\\\\\\\\\\\\\\\\\\\\\
-    procedure RaiseObsoleteOnBeforeInitSeries(var DefaultNoSeriesCode: Code[20]; OldNoSeriesCode: Code[20]; NewDate: Date; var NewNo: Code[20]; var NewNoSeriesCode: Code[20]; var IsHandled: Boolean)
-    var
-        GlobalNoSeries: Record "No. Series";
-        GlobalNoSeriesCode: Code[20];
-    begin
-        OnBeforeInitSeries(DefaultNoSeriesCode, OldNoSeriesCode, NewDate, NewNo, NewNoSeriesCode, GlobalNoSeries, IsHandled, GlobalNoSeriesCode);
-    end;
+    // procedure RaiseObsoleteOnBeforeInitSeries(var DefaultNoSeriesCode: Code[20]; OldNoSeriesCode: Code[20]; NewDate: Date; var NewNo: Code[20]; var NewNoSeriesCode: Code[20]; var IsHandled: Boolean)
+    // var
+    //     GlobalNoSeries: Record "No. Series";
+    //     GlobalNoSeriesCode: Code[20];
+    // begin
+    //     OnBeforeInitSeries(DefaultNoSeriesCode, OldNoSeriesCode, NewDate, NewNo, NewNoSeriesCode, GlobalNoSeries, IsHandled, GlobalNoSeriesCode);
+    // end;
 
-    local procedure OnBeforeInitSeries(var DefaultNoSeriesCode: Code[20]; OldNoSeriesCode: Code[20]; NewDate: Date; var NewNo: Code[20]; var NewNoSeriesCode: Code[20]; var NoSeries: Record "No. Series"; var IsHandled: Boolean; var NoSeriesCode: Code[20])
-    begin
-    end;
-    /////////////////////////////AFTER\\\\\\\\\\\\\\\\\\\\\\\\\\/// 
-    procedure RaiseObsoleteOnAfterInitSeries(NoSeriesCode: Code[20]; DefaultNoSeriesCode: Code[20]; NewDate: Date; var NewNo: Code[20])
-    var
-        NoSeries: Record "No. Series";
-    begin
-        if NoSeries.Get(NoSeriesCode) then;
-        OnAfterInitSeries(NoSeries, DefaultNoSeriesCode, NewDate, NewNo);
-    end;
+    // local procedure OnBeforeInitSeries(var DefaultNoSeriesCode: Code[20]; OldNoSeriesCode: Code[20]; NewDate: Date; var NewNo: Code[20]; var NewNoSeriesCode: Code[20]; var NoSeries: Record "No. Series"; var IsHandled: Boolean; var NoSeriesCode: Code[20])
+    // begin
+    // end;
+    // /////////////////////////////AFTER\\\\\\\\\\\\\\\\\\\\\\\\\\/// 
+    // procedure RaiseObsoleteOnAfterInitSeries(NoSeriesCode: Code[20]; DefaultNoSeriesCode: Code[20]; NewDate: Date; var NewNo: Code[20])
+    // var
+    //     NoSeries: Record "No. Series";
+    // begin
+    //     if NoSeries.Get(NoSeriesCode) then;
+    //     OnAfterInitSeries(NoSeries, DefaultNoSeriesCode, NewDate, NewNo);
+    // end;
 
-    local procedure OnAfterInitSeries(var NoSeries: Record "No. Series"; DefaultNoSeriesCode: Code[20]; NewDate: Date; var NewNo: Code[20])
-    begin
-    end;
+    // local procedure OnAfterInitSeries(var NoSeries: Record "No. Series"; DefaultNoSeriesCode: Code[20]; NewDate: Date; var NewNo: Code[20])
+    // begin
+    // end;
     ///////------CUSTOM "No.SERIESMGT"  END------\\\\\\\
 
     // [EventSubscriber(ObjectType::Table, Database::"Transfer Header", , '', true, true)]
